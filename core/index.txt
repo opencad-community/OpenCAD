@@ -1,0 +1,2 @@
+This is the core folder. It will be autoloaded by composer. It will contain all of the logic for the app. It will be responsible for calling the CRUD operations from the API and will also be responsible for handing the user data.
+
