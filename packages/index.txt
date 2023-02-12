@@ -1,0 +1,1 @@
+This folder will contain custom packages OR custom plugins. All of these will be autolaoded and will the ability to quickly and easily add packages such as session handling and optionResolvers.
