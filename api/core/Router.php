@@ -65,6 +65,7 @@ class Router
             // If an error occurs, log the error message
             error_log($e->getMessage());
         }
+
     }
 
     /**
