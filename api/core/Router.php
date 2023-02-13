@@ -17,6 +17,7 @@ class Router
      */
     public function add($route, $params)
     {
+        $route = '/api' . $route;
         $this->routes[$route] = $params;
     }
 
