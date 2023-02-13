@@ -1,3 +1,0 @@
-This folder will contain the backend API that will be incharge of all of the CRUD operations. 
-
-This folder will contain lots of other folders and files that are included with the API. This API may have it's own repo and be separate from the frontend to allow easier development.
