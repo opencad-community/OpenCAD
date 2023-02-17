@@ -1,0 +1,20 @@
+{
+    "name": "opencad/api",
+    "description": "This is the backend API for the OpenCAD project. This is required for the frontend to communicate.",
+    "autoload": {
+        "psr-4": {
+            "App\\": "app/",
+            "Core\\": "core/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Kevin Gorman",
+            "email": "kgorman436@gmail.com",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "firebase/php-jwt": "^6.4"
+    }
+}
