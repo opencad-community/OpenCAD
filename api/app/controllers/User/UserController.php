@@ -53,7 +53,6 @@ class UserController
         }
     }
 
-
     /**
      * Show the information of a specific user
      *
@@ -82,7 +81,6 @@ class UserController
             $response->send();
         }
     }
-
 
 
     /**
@@ -153,8 +151,6 @@ class UserController
         }
     }
     
-
-
     /**
      * Deletes a user from the database
      *
@@ -178,7 +174,7 @@ class UserController
                 // Send the response to the client
                 $response->send();
             }
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             // If an exception was thrown, create an internal server error response object with the exception message
             $response = Response::internalServerError($e->getMessage());
             // Send the response to the client
@@ -186,5 +182,4 @@ class UserController
         }
     }
     
-
 }
