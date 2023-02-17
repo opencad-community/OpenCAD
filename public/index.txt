@@ -1,3 +1,0 @@
-This folder is the ONLY publically asessible file. This is a bit similar to how MVC apps work. It adds security to the app as people are unable to browse folders within OC. 
-
-This file may contain things like calling the bootstrap folder (Responsible for managing all of the autoloading etc).
