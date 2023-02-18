@@ -118,6 +118,87 @@ INSERT INTO `departments` VALUES (1,'Sales','SAL',1,'2022-12-01 00:00:00'),(2,'M
 UNLOCK TABLES;
 
 --
+-- Table structure for table `ncic_attributes`
+--
+
+DROP TABLE IF EXISTS `ncic_attributes`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `ncic_attributes` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `attribute_name` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `ncic_attributes`
+--
+
+LOCK TABLES `ncic_attributes` WRITE;
+/*!40000 ALTER TABLE `ncic_attributes` DISABLE KEYS */;
+INSERT INTO `ncic_attributes` VALUES (1,'Height'),(2,'Weight'),(3,'Eye Color'),(4,'Skin Tone');
+/*!40000 ALTER TABLE `ncic_attributes` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `ncic_user_attributes`
+--
+
+DROP TABLE IF EXISTS `ncic_user_attributes`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `ncic_user_attributes` (
+  `user_id` int NOT NULL,
+  `attribute_id` int NOT NULL,
+  `attribute_value` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`user_id`,`attribute_id`),
+  KEY `attribute_id` (`attribute_id`),
+  CONSTRAINT `ncic_user_attributes_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `ncic_users` (`id`) ON DELETE CASCADE,
+  CONSTRAINT `ncic_user_attributes_ibfk_2` FOREIGN KEY (`attribute_id`) REFERENCES `ncic_attributes` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `ncic_user_attributes`
+--
+
+LOCK TABLES `ncic_user_attributes` WRITE;
+/*!40000 ALTER TABLE `ncic_user_attributes` DISABLE KEYS */;
+INSERT INTO `ncic_user_attributes` VALUES (4,1,'185 cm'),(4,2,'90 kg'),(4,3,'Blue'),(5,2,'60 kg'),(5,4,'Light');
+/*!40000 ALTER TABLE `ncic_user_attributes` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `ncic_users`
+--
+
+DROP TABLE IF EXISTS `ncic_users`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `ncic_users` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `users_id` int NOT NULL,
+  `first_name` varchar(255) DEFAULT NULL,
+  `last_name` varchar(255) DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  KEY `users_id` (`users_id`),
+  CONSTRAINT `ncic_users_ibfk_1` FOREIGN KEY (`users_id`) REFERENCES `users` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `ncic_users`
+--
+
+LOCK TABLES `ncic_users` WRITE;
+/*!40000 ALTER TABLE `ncic_users` DISABLE KEYS */;
+INSERT INTO `ncic_users` VALUES (4,3,'Bob','Smith','2023-02-18 17:49:48'),(5,3,'Bill','Smith','2023-02-18 17:49:48');
+/*!40000 ALTER TABLE `ncic_users` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `streets`
 --
 
@@ -155,8 +236,10 @@ CREATE TABLE `tokens` (
   `user_id` int NOT NULL,
   `expires_at` datetime NOT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `tokens_token_uindex` (`token`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  UNIQUE KEY `tokens_token_uindex` (`token`),
+  KEY `fk_token_user` (`user_id`),
+  CONSTRAINT `fk_token_user` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -165,7 +248,6 @@ CREATE TABLE `tokens` (
 
 LOCK TABLES `tokens` WRITE;
 /*!40000 ALTER TABLE `tokens` DISABLE KEYS */;
-INSERT INTO `tokens` VALUES (9,'xmC1YvHRl3oQUKJ8tTcqOIuFncR8V3Ow1g5iC1aIqYMAlZAjvIotlzuuUPBQVccb6p_Kn-53Zv_vzYHUTy-ABgd3C06IPP0HyYnMxwLNOc52RG5ULXSODH-Va-apMtZy6hUTDhYU094Dwetp_GYZDw9cvS_tna7ejalFpEo=',22,'2023-02-18 11:47:16'),(10,'D60wEp5CVbj2U0zkReagYVEtnOto65Ep3DQ_URkFW_Nfx_LBhOn9_rAQApRCU2P_NoPtDlZtdiuXsYFcUexSL8Dk3XFBsLn1neQ-bBkZi33QOiPu9Hk7jxiYk7WpNTAu4OwHNvXvsPPWjQvfnImk3C45cgiD7Ci7fC1ra34=',22,'2023-02-18 11:18:39');
 /*!40000 ALTER TABLE `tokens` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -185,7 +267,7 @@ CREATE TABLE `user_department` (
   KEY `department_id` (`department_id`),
   CONSTRAINT `user_department_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE,
   CONSTRAINT `user_department_ibfk_2` FOREIGN KEY (`department_id`) REFERENCES `departments` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -194,7 +276,6 @@ CREATE TABLE `user_department` (
 
 LOCK TABLES `user_department` WRITE;
 /*!40000 ALTER TABLE `user_department` DISABLE KEYS */;
-INSERT INTO `user_department` VALUES (14,4,4),(15,5,5),(16,6,6),(17,7,7),(18,8,8),(24,4,5),(25,5,6),(26,6,7),(27,7,8),(28,8,9);
 /*!40000 ALTER TABLE `user_department` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -209,11 +290,12 @@ CREATE TABLE `users` (
   `id` int NOT NULL AUTO_INCREMENT,
   `name` varchar(100) NOT NULL,
   `email` varchar(100) NOT NULL,
+  `username` varchar(255) NOT NULL,
   `password` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `created_on` datetime DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   KEY `email` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -222,7 +304,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (4,'Alice Brown','alicebrown@example.com','','2022-12-04 00:00:00'),(5,'Mike Johnson','mikejohnson@example.com','','2022-12-05 00:00:00'),(6,'Sarah Davis','sarahdavis@example.com','','2022-12-06 00:00:00'),(7,'David Green','davidgreen@example.com','','2022-12-07 00:00:00'),(8,'Emily Wilson','emilywilson@example.com','','2022-12-08 00:00:00'),(12,'Liam Parker','liamparker@example.com','$2y$10$yRUJhSz1BjKx/ZwzDp.Fp.P.WycKjyB/E/gvozQQM/hcVzQZj/s/m','2022-12-11 12:00:00'),(13,'Emma Watson','emmawatson@example.com','$2y$10$1V7QQI/jPv7q3gjfPMeoFw.bv5v5L5qqWJeC9t1mgK5YjvO8P0W/c2','2022-12-12 11:00:00'),(14,'Olivia Smith','oliviasmith@example.com','$2y$10$RcKjorIlH/I9uQ/d/J7v3eB/J6HbM2Kjg6o0q6U4T6pJjKU0z0RbO','2022-12-13 14:00:00'),(15,'Noah Brown','noahbrown@example.com','$2y$10$vNp/jK.Ea/Zwz.6gvQKjM/O/9e6m/hj/3U6D/U6jhQ6Zj/s/m','2022-12-14 13:00:00'),(16,'Ava Davis','avadavis@example.com','$2y$10$B/jKx/ZwzDp1BjKx/ZwzDp.Fp.P.WycKjyB/E/gvozQQM/hcVzQZj/s/m','2022-12-15 12:00:00'),(17,'Isabella Wilson','isabellawilson@example.com','$2y$10$1V7QQI/jPv7q3gjfPMeoFw.bv5v5L5qqWJeC9t1mgK5YjvO8P0W/c2','2022-12-16 11:00:00'),(18,'Sophia Johnson','sophiajohnson@example.com','$2y$10$RcKjorIlH/I9uQ/d/J7v3eB/J6HbM2Kjg6o0q6U4T6pJjKU0z0RbO','2022-12-17 14:00:00'),(19,'Mia Taylor','miataylor@example.com','$2y$10$vNp/jK.Ea/Zwz.6gvQKjM/O/9e6m/hj/3U6D/U6jhQ6Zj/s/m','2022-12-18 13:00:00'),(20,'Bob John','bobbob@example.com','asd','2023-02-14 18:46:08'),(22,'Keivn Gorman','kgorman436@gmail.com','$2y$10$KallanogEVvqwXTI/fp.QOTQw4dPZJx5JxpxeBgwhf0dqUdDZmU.m','2023-02-18 10:08:58');
+INSERT INTO `users` VALUES (1,'','johndoe@example.com','johndoe','password1','2023-02-18 17:49:48'),(3,'','bobsmith@example.com','bobsmith','password3','2023-02-18 17:49:48'),(4,'','janedoe@example.com','janedoe','password4','2023-02-18 17:53:19'),(5,'','joesmith@example.com','joesmith','password5','2023-02-18 17:53:19');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -235,4 +317,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-02-18 17:05:24
+-- Dump completed on 2023-02-18 21:03:54
