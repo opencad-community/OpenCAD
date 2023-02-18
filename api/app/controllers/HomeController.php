@@ -14,7 +14,7 @@ class HomeController
     public function index()
     {
         // Load the configuration file
-        $config = require __DIR__ . '/../../config/config.php';
+        $config = require_once __DIR__ . '/../../config/config.php';
 
         // Extract the relevant data from the configuration file
         $version = $config['app']['version'];
