@@ -14,5 +14,7 @@
             "role": "Developer"
         }
     ],
-    "require": {}
+    "require": {
+        "firebase/php-jwt": "^6.4"
+    }
 }
