@@ -8,11 +8,14 @@ require_once __DIR__ . "/../core/bootstrap.php";
 $router = new Router();
 // Add routes to the router
 
+// Generate Token
+$router->add('/generate-token', ['controller' => 'Api\AuthController', 'action' => 'generateToken']);
+
 // Route for the home page
-$router->add('/', ['controller' => 'HomeController', 'action' => 'index']);
+$router->add('/', ['controller' => 'HomeController', 'action' => 'index'], ["AuthMiddleware"]);
 
 // Group of routes for the user
-$router->group('/user', [], function () use ($router) {
+$router->group('/user', ["AuthMiddleware"], function () use ($router) {
     // Route for the user index page
     $router->add('', ['controller' => 'User\UserController', 'action' => 'index']);
     // Route for a specific user page
@@ -26,7 +29,7 @@ $router->group('/user', [], function () use ($router) {
 });
 
 // Group of routes for departments
-$router->group('/departments', [], function () use ($router) {
+$router->group('/departments', ["AuthMiddleware"], function () use ($router) {
     // Route for the departments index page
     $router->add('', ['controller' => 'Departments\DepartmentController', 'action' => 'index']);
     // Route for creating a new department
@@ -40,7 +43,7 @@ $router->group('/departments', [], function () use ($router) {
 });
 
 // Group of routes for user-department relationships
-$router->group('/user/([0-9]+)/department/([0-9]+)/', [], function () use ($router) {
+$router->group('/user/([0-9]+)/department/([0-9]+)/', ["AuthMiddleware"], function () use ($router) {
     // Route for adding a user to a department
     $router->add('add', ['controller' => 'Relationships\DepartmentUserController', 'action' => 'addUserToDepartment']);
     // Route for removing a user from a department
@@ -48,34 +51,63 @@ $router->group('/user/([0-9]+)/department/([0-9]+)/', [], function () use ($rout
 });
 
 // Group of routes for a specific department
-$router->group('/department/([0-9]+)/', [], function () use ($router) {
+$router->group('/department/([0-9]+)/', ["AuthMiddleware"], function () use ($router) {
     // Route for getting all users in a specific department
     $router->add('users', ['controller' => 'Relationships\DepartmentUserController', 'action' => 'getUsersInDepartment']);
 });
 
 // Group of routes for a specific user
-$router->group('/user/([0-9]+)/', [], function () use ($router) {
+$router->group('/user/([0-9]+)/', ["AuthMiddleware"], function () use ($router) {
     // Route for getting all departments for a specific user
     $router->add('departments', ['controller' => 'Relationships\DepartmentUserController', 'action' => 'getDepartmentsForUser']);
 });
 
 // Group of routes for streets
-$router->group('/streets', [], function () use ($router) {
+$router->group('/streets', ["AuthMiddleware"], function () use ($router) {
     // Route for getting all streets
-    $router->add('', ['controller' => 'Game\StreetsController', 'action' => 'index']);
+    $router->add('', ['controller' => 'Game\GTAV\StreetsController', 'action' => 'index']);
     // Route for getting a street by id
-    $router->add('/([0-9]+)', ['controller' => 'Game\StreetsController', 'action' => 'show']);
+    $router->add('/([0-9]+)', ['controller' => 'Game\GTAV\StreetsController', 'action' => 'show']);
     // Route for adding a new street
-    $router->add('/create', ['controller' => 'Game\StreetsController', 'action' => 'create']);
+    $router->add('/create', ['controller' => 'Game\GTAV\StreetsController', 'action' => 'create']);
     // Route for updating a street
-    $router->add('/([0-9]+)/update', ['controller' => 'Game\StreetsController', 'action' => 'update']);
+    $router->add('/([0-9]+)/update', ['controller' => 'Game\GTAV\StreetsController', 'action' => 'update']);
     // Route for deleting a street
-    $router->add('/([0-9]+)/delete', ['controller' => 'Game\StreetsController', 'action' => 'delete']);
+    $router->add('/([0-9]+)/delete', ['controller' => 'Game\GTAV\StreetsController', 'action' => 'delete']);
+});
+
+// Group of routes for the NCIC
+$router->group('/ncic', ["AuthMiddleware"], function () use ($router) {
+    // Route for the NCIC index page
+    $router->add('', ['controller' => 'Game\GTAV\NCIC\NCICController', 'action' => 'index']);
+    // Route for a specific NCIC user page
+    $router->add('/user/([0-9]+)', ['controller' => 'Game\GTAV\NCIC\NCICController', 'action' => 'show']);
+    // Route for creating a new NCIC user
+    $router->add('/user/create', ['controller' => 'Game\GTAV\NCIC\NCICController', 'action' => 'create']);
+    // Route for updating an existing NCIC user
+    $router->add('/user/([0-9]+)/update', ['controller' => 'Game\GTAV\NCIC\NCICController', 'action' => 'update']);
+    // Route for deleting an existing NCIC user
+    $router->add('/user/([0-9]+)/delete', ['controller' => 'Game\GTAV\NCIC\NCICController', 'action' => 'delete']);
+
+    // Route for all NCIC attributes
+    $router->add('/attributes', ['controller' => 'Game\GTAV\NCIC\NCICController', 'action' => 'showAttributes']);
+    // Route for a specific NCIC attribute page
+    $router->add('/attribute/([0-9]+)', ['controller' => 'Game\GTAV\NCIC\NCICController', 'action' => 'showUserAttributes']);
+    // Route for creating a new NCIC attribute
+    $router->add('/attribute/create', ['controller' => 'Game\GTAV\NCIC\NCICController', 'action' => 'createAttribute']);
+    // Route for updating an existing NCIC attribute
+    $router->add('/attribute/([0-9]+)/update', ['controller' => 'Game\GTAV\NCIC\NCICController', 'action' => 'updateAttribute']);
+    // Route for deleting an existing NCIC attribute
+    $router->add('/attribute/([0-9]+)/delete', ['controller' => 'Game\GTAV\NCIC\NCICController', 'action' => 'deleteAttribute']);
+
+    // Route for managing attributes for a specific NCIC user
+    $router->add('/user/([0-9]+)/attributes', ['controller' => 'Game\GTAV\NCIC\NCICController', 'action' => 'showUserAttributes']);
+    
 });
 
 
 // Group of routes for the API roles
-$router->group('/api-role', [], function () use ($router) {
+$router->group('/api-role', ["AuthMiddleware"], function () use ($router) {
     // Route for the API roles index page
     $router->add('', ['controller' => 'Api\ApiRoleController', 'action' => 'index']);
     // Route for creating a new API role
@@ -89,7 +121,7 @@ $router->group('/api-role', [], function () use ($router) {
 });
 
 // Group of routes for the API Permissions
-$router->group('/api-permissions', [], function () use ($router) {
+$router->group('/api-permissions', ["AuthMiddleware"], function () use ($router) {
     // Route for the API Permissions index page
     $router->add('', ['controller' => 'Api\ApiPermissionController', 'action' => 'index']);
     // Route for creating a new API Permission
@@ -103,7 +135,7 @@ $router->group('/api-permissions', [], function () use ($router) {
 });
 
 // Group of routes for the API Role Permissions
-$router->group('/api-role-permissions', [], function () use ($router) {
+$router->group('/api-role-permissions', ["AuthMiddleware"], function () use ($router) {
     // Route for the api role permissions index page
     $router->add('', ['controller' => 'Relationships\ApiRolePermissionController', 'action' => 'index']);
     // Route for creating a new api role permission

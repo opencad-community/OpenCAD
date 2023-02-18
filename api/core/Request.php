@@ -125,4 +125,24 @@ class Request
         $data = json_decode(file_get_contents('php://input'), true);
         return $data;
     }
+
+    /**
+     * Get a header value from the request
+     *
+     * @param string $name The name of the header to get
+     * @return string|null The value of the header, or null if the header is not present
+     */
+    public static function getHeader($name)
+    {
+        // Get all HTTP headers from the server environment
+        $headers = getallheaders();
+
+        // Check if the header is present and return its value
+        if (isset($headers[$name])) {
+            return $headers[$name];
+        }
+
+        // If the header is not present, return null
+        return null;
+    }
 }

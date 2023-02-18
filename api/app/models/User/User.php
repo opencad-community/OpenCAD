@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Models\User;
 
 use Core\Database;
@@ -58,10 +59,11 @@ class User
      */
     public function addUser($data)
     {
+        $password = password_hash($data["password"], PASSWORD_DEFAULT);
         $stmt = $this->database->prepare('INSERT INTO users (name, email, password) VALUES (:name, :email, :password)');
         $stmt->bindParam(':name', $data['name'], \PDO::PARAM_STR);
         $stmt->bindParam(':email', $data['email'], \PDO::PARAM_STR);
-        $stmt->bindParam(':password', $data['password'], \PDO::PARAM_STR);
+        $stmt->bindParam(':password', $password, \PDO::PARAM_STR);
         $this->database->executeStatement($stmt);
         return (int) $this->database->lastInsertId();
     }
@@ -97,4 +99,5 @@ class User
         $stmt->bindParam(':id', $id, \PDO::PARAM_INT);
         return $this->database->executeStatement($stmt);
     }
+
 }

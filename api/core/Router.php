@@ -128,10 +128,17 @@ class Router
                     // Create an instance of the middleware
                     $middleware = new $middleware();
 
-                    // Call the handle method on the middleware
-                    $middleware->handle();
+                    try {
+                        // Call the handle method on the middleware
+                        $middleware->handle();
+                    } catch (Exception $e) {
+                        // If an exception is caught, send an error response and stop the middleware chain
+                        $response = Response::error($e->getMessage());
+                        $response->send();
+                        return;
+                    }
                 }
-
+                
                 // Create an instance of the controller
                 $controller = "$namespace$controller";
                 $controller = new $controller();
