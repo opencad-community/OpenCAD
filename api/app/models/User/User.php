@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Models\User;
 
 use Core\Database;
@@ -99,5 +98,4 @@ class User
         $stmt->bindParam(':id', $id, \PDO::PARAM_INT);
         return $this->database->executeStatement($stmt);
     }
-
 }
