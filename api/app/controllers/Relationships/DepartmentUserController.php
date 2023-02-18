@@ -78,6 +78,7 @@ class DepartmentUserController
         }
     }
 
+
     /**
      * Gets all the users in a department
      *
@@ -106,6 +107,9 @@ class DepartmentUserController
         }
     }
 
+
+
+
     /**
      * Gets all the departments a user is in
      *
@@ -133,4 +137,6 @@ class DepartmentUserController
             $response->send();
         }
     }
+
+
 }

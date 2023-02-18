@@ -5,6 +5,10 @@ use Opencad\App\PluginManager\PluginLoader;
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
+if (session_status() === PHP_SESSION_NONE) {
+  session_start();
+}
+
 $navItems = array(
   new NavItem('Home', '/'),
   new NavItem('About', '/about'),

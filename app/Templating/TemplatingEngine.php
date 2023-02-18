@@ -2,6 +2,8 @@
 
 namespace Opencad\App\Templating;
 
+use HTMLPurifier;
+
 class TemplatingEngine
 {
     protected $templateDir;
@@ -22,6 +24,15 @@ class TemplatingEngine
         if (!file_exists($templatePath)) {
             throw new \Exception("Template file not found: $templatePath");
         }
+        // Sanitize user input
+        array_walk_recursive($data, function (&$value) {
+            $value = strip_tags($value);
+        });
+
+        // Escape user input
+        array_walk_recursive($data, function (&$value) {
+            $value = htmlspecialchars($value, ENT_QUOTES, 'UTF-8');
+        });
 
         extract($data);
         ob_start();
