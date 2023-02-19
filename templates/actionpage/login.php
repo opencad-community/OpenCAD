@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 
 
-<?php include "./images"; ?>
+<link rel="icon" type="image/x-icon" href="./../images/favicon.ico">
 <html>
 <head>
 	<title>OpenCAD</title>
