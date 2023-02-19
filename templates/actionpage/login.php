@@ -6,9 +6,11 @@
 <head>
 	<title>OpenCAD</title>
 	<style>
+		html {
+  				height: 100%;
+		}
 		body {
-			background-color: #14051d;
-			color: #fff;
+			background: linear-gradient(to bottom, #14051d, #333);
 			font-family: Arial, sans-serif;
 		}
 		
@@ -41,6 +43,12 @@
 			padding: 10px;
 			width: 100%;
 		}
+		.center {
+            text-align: center;
+            font-size:16px;
+			font-weight: bold;
+			color: #c7c7c7;
+        }
 	</style>
 </head>
 <body>
@@ -52,6 +60,9 @@
 	  width="320" 
      height="80" />
 
+</div>
+<div class="center">
+    <p> "< COMMUNTY_NAME >" </p>
 </div>
 
 		<label for="username">Username:</label>

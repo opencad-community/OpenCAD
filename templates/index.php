@@ -1,36 +1,109 @@
-<?= $doctype ?>
+<!DOCTYPE html>
 <html>
-
 <head>
-    <meta charset="UTF-8">
-    <title>
-        <?= $title ?>
-    </title>
+	<title>OpenCAD</title>
+    <link rel="icon" type="image/x-icon" href="./../images/favicon.ico">
+	<style>
+	
+		html {
+  				height: 100%;
+		}
+		body {
+			background: linear-gradient(to bottom, #14051d, #333);
+			font-family: Arial, sans-serif;
+		}
+		
+		form {
+			background-color: #333;
+			border-radius: 10px;
+			padding: 20px;
+			margin: 50px auto;
+			width: 300px;
+		}
+		
+		input[type="text"], input[type="password"] {
+			background-color: #ddd;
+			border: none;
+			border-radius: 5px;
+			box-sizing: border-box;
+			font-size: 16px;
+			margin-bottom: 10px;
+			padding: 10px;
+			width: 100%;
+            text-align: center;
+		}
+		
+		input[type="submit"] {
+			background-color: #4CAF50;
+			border: none;
+			border-radius: 5px;
+			color: #000;
+			cursor: pointer;
+			font-size: 16px;
+			padding: 10px;
+			width: 100%;
+		}
+
+        .center {
+            text-align: center;
+            font-size:16px;
+			font-weight: bold;
+			color: #c7c7c7;
+        }
+		
+		.button {
+  			background-color: #4CAF50; /* Green */
+  			border: none;
+			color: white;
+			padding: 16px 84px;
+			text-align: center;
+			text-decoration: none;
+			display: inline-block;
+			font-size: 16px;
+			margin: auto;
+			transition-duration: 0.4s;
+			cursor: pointer;
+			border-radius: 8px;
+		}
+
+		.button1 {
+			background-color: #4CAF50; 
+			color: black; 
+			border: 2px solid #4CAF50;
+	 	}	
+		.button1:hover {
+			background-color: #4CAF50;
+			color: white;
+}
+		div {
+			padding-top: 10px;
+
+			}	
+
+	</style>
 </head>
-
 <body>
-    <h1>Welcome to my page!</h1>
-    <p>This is a sample page created using HTML.</p>
+	<form>
+		
+        <div class="image">
 
-    <?php
-    
-    use Opencad\App\Forms\DynamicForm;
+      <img src="./images/logo.png" alt="OpenCAD"
+	  width="320" 
+     height="80" />
 
-    $form = new DynamicForm('/');
-    $form->addField('name', 'text');
-    $form->addField('email', 'text');
-    $form->addField('gender', 'select', ['Male', 'Female']);
-    $form->addField('agree', 'checkbox');
 
-    $form->render();
+</div>
+<div class="center">
+    <p> "< COMMUNTY_NAME >" </p>
+</div>
+<div>
+<a class="button button1" href="./actionpage/login.php" <style="margin-bottom:20px;">Login</a> 
+</div>
 
-    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-        $data = $form->handleData();
-        // handle the form data here
-        var_dump($data);
-    }
-
-    ?>
+<div>
+<a class="button button1" href="./actionpage/registration.php" >Register</a>
+</div>
+	</form>
+	
 </body>
-
 </html>
