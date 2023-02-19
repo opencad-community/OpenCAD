@@ -87,7 +87,7 @@
 		
         <div class="image">
 
-      <img src="./../images/logo.png" alt="OpenCAD"
+      <img src="./images/logo.png" alt="OpenCAD"
 	  width="320" 
      height="80" />
 
