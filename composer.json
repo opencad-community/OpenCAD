@@ -1,0 +1,17 @@
+{
+    "name": "opencad/frontend",
+    "description": "The frontend for the OpenCAD project, a web-based computer-aided dispatch system for emergency services.",
+    "autoload": {
+        "psr-4": {
+            "Opencad\\Core\\": "core/",
+            "Opencad\\App\\": "app/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Kevin Gorman",
+            "email": "kgorman436@gmail.com"
+        }
+    ],
+    "require": {}
+}

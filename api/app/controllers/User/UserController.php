@@ -53,6 +53,7 @@ class UserController
         }
     }
 
+
     /**
      * Show the information of a specific user
      *
@@ -81,6 +82,7 @@ class UserController
             $response->send();
         }
     }
+
 
 
     /**
@@ -151,6 +153,8 @@ class UserController
         }
     }
     
+
+
     /**
      * Deletes a user from the database
      *
@@ -182,4 +186,5 @@ class UserController
         }
     }
     
+
 }

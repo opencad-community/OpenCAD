@@ -59,7 +59,7 @@ class Database
      */
     public static function getInstance()
     {
-        $config = include __DIR__ . '/../config/database.php';
+        $config = require_once __DIR__ . '/../config/database.php';
 
         $dsn = "mysql:host={$config['host']};dbname={$config['dbname']}";
         $username = $config['username'];

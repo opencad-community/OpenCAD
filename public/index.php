@@ -1,89 +1,16 @@
-<!DOCTYPE html>
-<html>
+<?php
 
-<head>
-    <meta charset="UTF-8">
-    <title>User List</title>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script>
-        function getUsers() {
-            $.ajax({
-                url: "/api/user",
-                type: 'GET',
-                success: function (data) {
-                    console.log(data);
-                    updateTable(data);
-                },
-                error: function (jqXHR, textStatus, errorThrown) {
-                    console.error(textStatus, errorThrown);
-                }
-            });
-        }
+use Opencad\App\Routing\Router;
 
-        function updateTable(data) {
-            var users = data;
-            var table = $('#user-table tbody');
-            table.empty();
+require_once(__DIR__."/../app/bootstrap.php");
 
-            for (var i = 0; i < users.length; i++) {
-                var user = users[i];
-                var row = $('<tr>');
+// Create a new router
+$router = new Router();
 
-                row.append($('<td>').text(user.id));
-                row.append($('<td>').text(user.name));
-                row.append($('<td>').text(user.email));
-                row.append($('<td>').text(user.created_on));
+// Add routes to the router
+$router->add('/', 'Home\HomeController');
 
-                table.append(row);
+// Run the router to handle the routing logic and controller execution
+$router->run();
 
-                table.append(row);
-            }
-        }
-
-        $(document).ready(function () {
-
-            getUsers();
-            setInterval(getUsers, 5000);
-        });
-    </script>
-</head>
-
-<body>
-    <table id="user-table" class="table table-bordered table-striped">
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Name</th>
-                <th>Email</th>
-                <th>Created On</th>
-            </tr>
-        </thead>
-        <tbody>
-        </tbody>
-    </table>
-
-    <style>
-        #user-table {
-            width: 100%;
-            margin-top: 20px;
-        }
-
-        #user-table th,
-        #user-table td {
-            text-align: center;
-            padding: 10px;
-        }
-
-        #user-table thead tr {
-            background-color: #333;
-            color: #fff;
-        }
-
-        #user-table tbody tr:nth-child(even) {
-            background-color: #f2f2f2;
-        }
-    </style>
-
-</body>
-
-</html>
+?>

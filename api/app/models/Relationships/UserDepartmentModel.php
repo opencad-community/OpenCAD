@@ -101,6 +101,7 @@ public function removeUserFromDepartment($userId, $departmentId)
         }
     }
 
+
     /**
      * Retrieves all departments associated with the given user.
      *
@@ -125,4 +126,5 @@ public function removeUserFromDepartment($userId, $departmentId)
             return [];
         }
     }
+
 }
