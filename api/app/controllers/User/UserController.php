@@ -249,9 +249,8 @@ class UserController
                     Session::set("user", $user);
                     return;
                 }
-            }
-            // If the user is not verified, return an unauthorized response
-            else {
+            } else {
+                // If the user is not verified, return an unauthorized response
                 $response = Response::unauthorized("Invalid email or password");
                 $response->send();
             }

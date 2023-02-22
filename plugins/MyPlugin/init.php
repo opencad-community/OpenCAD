@@ -24,13 +24,13 @@ class MyPlugin implements PluginInterface
     $parent = new NavItem('PluginParent', '#');
 
     // Add the child items to the parent item
-    $PluginChild1 = new NavItem('PluginChild1', '/PluginChild1');
-    $PluginChild2 = new NavItem('PluginChild2', '/PluginChild2');
-    $PluginChild3 = new NavItem('PluginChild3', '/PluginChild3');
+    $pluginChild1 = new NavItem('PluginChild1', '/PluginChild1');
+    $pluginChild2 = new NavItem('PluginChild2', '/PluginChild2');
+    $pluginChild3 = new NavItem('PluginChild3', '/PluginChild3');
 
-    $parent->addChild($PluginChild1);
-    $parent->addChild($PluginChild2);
-    $parent->addChild($PluginChild3);
+    $parent->addChild($pluginChild1);
+    $parent->addChild($pluginChild2);
+    $parent->addChild($pluginChild3);
 
     // Add the parent item to the nav items array
     $navItems[] = $parent;

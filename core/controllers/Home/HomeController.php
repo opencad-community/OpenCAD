@@ -20,8 +20,7 @@ class HomeController
       'content' => 'Welcome to my app!',
     ];
 
-    $html = $this->templatingEngine->render('index', $data);
+    return $this->templatingEngine->render('index', $data);
 
-    return $html;
   }
 }

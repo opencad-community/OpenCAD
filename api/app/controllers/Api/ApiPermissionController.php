@@ -70,9 +70,8 @@ class ApiPermissionController
             if ($apiPermission) {
                 $response = Response::success($apiPermission);
                 $response->send();
-            }
-            // If api permission is not found, send a not found response with a custom message
-            else {
+            } else {
+                // If api permission is not found, send a not found response with a custom message
                 $response = Response::notFound("Api permission with ID {$id} not found");
                 $response->send();
             }

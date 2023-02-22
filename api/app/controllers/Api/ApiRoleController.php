@@ -68,9 +68,8 @@ class ApiRoleController
             if ($apiRole) {
                 $response = Response::success($apiRole);
                 $response->send();
-            }
-            // If api role is not found, send a not found response with a custom message
-            else {
+            } else {
+                // If api role is not found, send a not found response with a custom message
                 $response = Response::notFound("Api role with ID {$id} not found");
                 $response->send();
             }
