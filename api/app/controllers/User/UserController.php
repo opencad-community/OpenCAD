@@ -76,9 +76,8 @@ class UserController
             if ($user) {
                 $response = Response::success($user);
                 $response->send();
-            }
-            // If user is not found, send a not found response with a custom message
-            else {
+            } else {
+                // If user is not found, send a not found response with a custom message
                 $response = Response::notFound("User with ID {$id} not found");
                 $response->send();
             }
@@ -179,7 +178,8 @@ class UserController
                 // Send the response to the client
                 $response->send();
             } else {
-                // If the user was not deleted, create a not found response object with a message indicating that the user was not found
+                // If the user was not deleted,
+                // create a not found response object with a message indicating that the user was not found
                 $response = Response::notFound("User with ID {$id} not found");
                 // Send the response to the client
                 $response->send();

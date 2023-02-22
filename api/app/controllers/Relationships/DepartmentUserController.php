@@ -17,12 +17,12 @@ class DepartmentUserController
 
     /**
      * Adds a user to a department.
-     * 
+     *
      * @param int $departmentId The ID of the department to add the user to.
      * @param int $userId The ID of the user to add to the department.
-     * 
+     *
      * @throws Exception If there's an error adding the user to the department.
-     * 
+     *
      * @return void
      */
     public function addUserToDepartment($departmentId, $userId)
@@ -33,11 +33,13 @@ class DepartmentUserController
 
             // Check if the result is true.
             if ($result) {
-                // If the result is true, send a success response with a message indicating that the user was added to the department.
+                // If the result is true,
+                // send a success response with a message indicating that the user was added to the department.
                 $response = Response::success("User added to department");
                 $response->send();
             } else {
-                // If the result is false, send a not found response with a message indicating that the department or user could not be found.
+                // If the result is false,
+                // send a not found response with a message indicating that the department or user could not be found.
                 $response = Response::notFound("Department or user not found");
                 $response->send();
             }

@@ -3,20 +3,26 @@ namespace Opencad\App\Forms;
 
 use Exception;
 
-class DynamicForm {
+define("LABEL", "<label for=");
+define("END_LABEL", "</label>");
+define("ID", " id=");
+class DynamicForm
+{
     private $fields = [];
     private $action;
     private $method;
     private $csrfToken;
 
-    public function __construct($action = '', $method = 'post') {
+    public function __construct($action = '', $method = 'post')
+    {
         $this->action = $action;
         $this->method = $method;
         $this->csrfToken = bin2hex(random_bytes(32));
         $_SESSION['csrf_token'] = $this->csrfToken;
     }
 
-    public function addField($name, $type, $options = []) {
+    public function addField($name, $type, $options = [])
+    {
         $this->fields[] = [
             'name' => $name,
             'type' => $type,
@@ -24,7 +30,8 @@ class DynamicForm {
         ];
     }
 
-    public function render() {
+    public function render()
+    {
         $html = '<form action="' . $this->action . '" method="' . $this->method . '">';
         $html .= '<input type="hidden" name="csrf_token" value="' . $this->csrfToken . '">';
 
@@ -33,16 +40,16 @@ class DynamicForm {
 
             switch ($field['type']) {
                 case 'text':
-                    $html .= '<label for="' . $field['name'] . '">' . ucfirst($field['name']) . '</label>';
-                    $html .= '<input type="text" name="' . $field['name'] . '" id="' . $field['name'] . '">';
+                    $html .= LABEL . '"' . $field['name'] . '">' . ucfirst($field['name']) . END_LABEL;
+                    $html .= '<input type="text" name="' . $field['name'] . ID . $field['name'] . '">';
                     break;
                 case 'email':
-                    $html .= '<label for="' . $field['name'] . '">' . ucfirst($field['name']) . '</label>';
-                    $html .= '<input type="email" name="' . $field['name'] . '" id="' . $field['name'] . '">';
+                    $html .= LABEL . '"' . $field['name'] . '">' . ucfirst($field['name']) . END_LABEL;
+                    $html .= '<input type="email" name="' . $field['name'] . ID . $field['name'] . '">';
                     break;
                 case 'select':
-                    $html .= '<label for="' . $field['name'] . '">' . ucfirst($field['name']) . '</label>';
-                    $html .= '<select name="' . $field['name'] . '" id="' . $field['name'] . '">';
+                    $html .= LABEL . '' . $field['name'] . '">' . ucfirst($field['name']) . END_LABEL;
+                    $html .= '<select name="' . $field['name'] . ID . $field['name'] . '">';
 
                     foreach ($field['options'] as $option) {
                         $html .= '<option value="' . $option . '">' . $option . '</option>';
@@ -51,9 +58,11 @@ class DynamicForm {
                     $html .= '</select>';
                     break;
                 case 'checkbox':
-                    $html .= '<input type="checkbox" name="' . $field['name'] . '" id="' . $field['name'] . '">';
-                    $html .= '<label for="' . $field['name'] . '">' . ucfirst($field['name']) . '</label>';
+                    $html .= '<input type="checkbox" name="' . $field['name'] . ID . $field['name'] . '">';
+                    $html .= LABEL . '' . $field['name'] . '">' . ucfirst($field['name']) . END_LABEL;
                     break;
+                default:
+                    error_log("Error logged");
             }
 
             $html .= '</div>';
@@ -64,7 +73,8 @@ class DynamicForm {
         echo $html;
     }
 
-    public function handleData() {
+    public function handleData()
+    {
         if (strtolower($_SERVER['REQUEST_METHOD']) !== $this->method) {
             throw new Exception('Invalid request method');
         }
@@ -76,7 +86,7 @@ class DynamicForm {
         $data = [];
 
         foreach ($this->fields as $field) {
-           htmlspecialchars($data[$field['name']] = isset($_POST[$field['name']]) ? $_POST[$field['name']] : null);
+            htmlspecialchars($data[$field['name']] = isset($_POST[$field['name']]) ? $_POST[$field['name']] : null);
         }
 
         return $data;

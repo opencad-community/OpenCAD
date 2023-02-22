@@ -15,6 +15,11 @@ class StreetsController
         $this->streetModel = new StreetModel();
     }
 
+     /**
+     * Retrieve all streets
+     *
+     * @return void
+     */
     public function index()
     {
         try {
@@ -32,6 +37,12 @@ class StreetsController
         }
     }
 
+     /**
+     * Retrieve a single street by ID
+     *
+     * @param int $id The ID of the street to retrieve
+     * @return void
+     */
     public function show($id)
     {
         try {
@@ -49,6 +60,12 @@ class StreetsController
         }
     }
 
+    
+    /**
+     * Add a new street
+     *
+     * @return void
+     */
     public function create()
     {
         try {
@@ -67,6 +84,12 @@ class StreetsController
         }
     }
 
+    
+    /**
+     * Update a street based on ID
+     *
+     * @return void
+     */
     public function update($id)
     {
         $data = Request::getData();
@@ -81,6 +104,12 @@ class StreetsController
         }
     }
 
+    
+    /**
+     * Delete Street based on ID
+     *
+     * @return void
+     */
     public function delete($id)
     {        try {
             $this->streetModel->deleteStreet($id);

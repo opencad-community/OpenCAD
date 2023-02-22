@@ -2,14 +2,16 @@
 namespace App\Core;
 
 use PDO;
-use Exception;
 use Core\Database;
 use Core\Response;
+
+define("TOKEN", ":token");
 
 class TokenAuth
 {
     protected $db;
     protected $expiry;
+
 
     public function __construct($expiry = 3600)
     {
@@ -22,14 +24,14 @@ class TokenAuth
         // Get the user ID associated with the token
         $query = "SELECT user_id FROM tokens WHERE token = :token AND expires_at >= NOW()";
         $stmt = $this->db->prepare($query);
-        $stmt->bindParam(':token', $token);
+        $stmt->bindParam(TOKEN, $token);
         $stmt->execute();
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
         if (!$result) {
             $query = "DELETE FROM tokens WHERE token = :token";
             $stmt = $this->db->prepare($query);
-            $stmt->bindParam(':token', $token);
+            $stmt->bindParam(TOKEN, $token);
             $stmt->execute();
             $response = Response::unauthorized("Token Expired or doesn't exist.");
             $response->send();
@@ -40,7 +42,7 @@ class TokenAuth
         $query = "UPDATE tokens SET expires_at = DATE_ADD(NOW(), INTERVAL :expiry SECOND) WHERE token = :token";
         $stmt = $this->db->prepare($query);
         $stmt->bindParam(':expiry', $this->expiry);
-        $stmt->bindParam(':token', $token);
+        $stmt->bindParam(TOKEN, $token);
         $stmt->execute();
 
         // Return the user ID associated with the token
@@ -75,7 +77,7 @@ class TokenAuth
         $db = Database::getInstance();
         $stmt = $db->prepare("INSERT INTO tokens (user_id, token, expires_at) VALUES (:user_id, :token, :expires_at)");
         $stmt->bindParam(':user_id', $userId);
-        $stmt->bindParam(':token', $token);
+        $stmt->bindParam(TOKEN, $token);
         $stmt->bindParam(":expires_at", $date);
         if ($db->executeStatement($stmt)) {
             // Return the generated token on success

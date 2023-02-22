@@ -2,6 +2,7 @@
 namespace Opencad\App\PluginManager;
 
 
-interface PluginInterface {
-    public function execute();
-  }
+interface PluginInterface
+{
+  public function execute();
+}

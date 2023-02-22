@@ -51,7 +51,7 @@ class NCICUser
         return $this->database->resultSet($stmt);
     }
 
-     /**
+    /**
      * Retrieves a single NCIC user from the ncic_users table by User Id.
      *
      * @param int $id The ID of the NCIC user to retrieve.
@@ -68,15 +68,19 @@ class NCICUser
 
     /**
      * Adds a new NCIC user to the ncic_users table.
-     * 
+     *
      * @param array $data An array of NCIC user data, including user_id, first_name, last_name and created_at.
-     * 
+     *
      * @return int The ID of the newly inserted NCIC user.
      */
     public function addNCICUser($data)
     {
         $date = date('Y-m-d H:i:s');
-        $stmt = $this->database->prepare('INSERT INTO ncic_users (users_id, first_name, last_name, created_at) VALUES (:user_id, :first_name, :last_name, :created_at)');
+        $stmt = $this->database->prepare(
+            'INSERT INTO ncic_users
+            (users_id, first_name, last_name, created_at)
+            VALUES (:user_id, :first_name, :last_name, :created_at)'
+        );
         $stmt->bindParam(':user_id', $data['user_id'], \PDO::PARAM_INT);
         $stmt->bindParam(':first_name', $data['first_name'], \PDO::PARAM_STR);
         $stmt->bindParam(':last_name', $data['last_name'], \PDO::PARAM_STR);
@@ -95,7 +99,13 @@ class NCICUser
      */
     public function updateNCICUser($id, $data)
     {
-        $stmt = $this->database->prepare('UPDATE ncic_users SET first_name = :first_name, last_name = :last_name, created_at = :created_at WHERE id = :id');
+        $stmt = $this->database->prepare(
+            'UPDATE ncic_users
+            SET first_name = :first_name,
+            last_name = :last_name,
+            created_at = :created_at
+            WHERE id = :id'
+        );
         $stmt->bindParam(':id', $id, \PDO::PARAM_INT);
         $stmt->bindParam(':first_name', $data['first_name'], \PDO::PARAM_STR);
         $stmt->bindParam(':last_name', $data['last_name'], \PDO::PARAM_STR);

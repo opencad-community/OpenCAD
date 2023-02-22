@@ -19,26 +19,26 @@ class HomeController
         // Extract the relevant data from the configuration file
         $version = $config['app']['version'];
         $title = $config['app']['title'];
-        $oc_description = $config["app"]["oc_description"];
-        $api_description = $config["app"]["api_description"];
-        $oc_github = $config["app"]["project_github"];
-        $author_name = $config['app']['author']["name"];
-        $author_email = $config["app"]["author"]["email"];
-        $author_discord = $config["app"]["author"]["discord"];
-        $author_github = $config["app"]["author"]["github"];
+        $ocDescription = $config["app"]["oc_description"];
+        $apiDescription = $config["app"]["api_description"];
+        $ocGithub = $config["app"]["project_github"];
+        $authorName = $config['app']['author']["name"];
+        $authorEmail = $config["app"]["author"]["email"];
+        $authorDiscord = $config["app"]["author"]["discord"];
+        $authorGithub = $config["app"]["author"]["github"];
 
         // Return the data in a response
         $response = [
             'Version' => $version,
             'Title' => $title,
-            'Description' => $oc_description,
-            'API Description' => $api_description,
-            'GitHub' => $oc_github,
+            'Description' => $ocDescription,
+            'API Description' => $apiDescription,
+            'GitHub' => $ocGithub,
             'Author' => [
-                'Authors Name' => $author_name,
-                "Authors Email" => $author_email,
-                "Authors Discord" => $author_discord,
-                "Authors GitHub" => $author_github
+                'Authors Name' => $authorName,
+                "Authors Email" => $authorEmail,
+                "Authors Discord" => $authorDiscord,
+                "Authors GitHub" => $authorGithub
             ]
         ];
         $response = Response::success($response);

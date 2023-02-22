@@ -56,7 +56,7 @@ class Router
      *
      * @return void
      */
-    public function use ($middleware)
+    public function use($middleware)
     {
         try {
             $this->middlewares[] = $middleware;
@@ -74,7 +74,7 @@ class Router
      *
      * @return array|bool The parameters for the route if a match is found, or false if no match is found
      */
-    public function match ($url)
+    public function match($url)
     {
         try {
             // Loop through each route in the array of routes

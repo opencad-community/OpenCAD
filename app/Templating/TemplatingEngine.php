@@ -2,41 +2,33 @@
 
 namespace Opencad\App\Templating;
 
-use HTMLPurifier;
-
 class TemplatingEngine
 {
     protected $templateDir;
 
-    protected $extension = ".html";
+    protected $cacheDir;
 
-    public function __construct($templateDir = null)
+    protected $cacheLifetime;
+
+    protected $templates = [];
+
+    public function __construct()
     {
-        if ($templateDir === null) {
-            $templateDir = __DIR__ . '/../../templates';
+        $this->templateDir = $_SERVER['DOCUMENT_ROOT'] . '/templates';
+        $this->cacheDir = sys_get_temp_dir() . '/opencad_cache';
+        $this->cacheLifetime = 3600;
+        if (!is_dir($this->cacheDir)) {
+            mkdir($this->cacheDir);
         }
-        $this->templateDir = $templateDir;
     }
 
-    public function render($template, $data = [])
+    public function render($templateName, $data = [])
     {
-        $templatePath = $this->templateDir . '/' . $template . '.php';
-        if (!file_exists($templatePath)) {
-            throw new \Exception("Template file not found: $templatePath");
+        if (!isset($this->templates[$templateName])) {
+            $this->templates[$templateName] = new
+                Template($this->templateDir, $templateName, '.html', $this->cacheDir, $this->cacheLifetime);
         }
-        // Sanitize user input
-        array_walk_recursive($data, function (&$value) {
-            $value = strip_tags($value);
-        });
 
-        // Escape user input
-        array_walk_recursive($data, function (&$value) {
-            $value = htmlspecialchars($value, ENT_QUOTES, 'UTF-8');
-        });
-
-        extract($data);
-        ob_start();
-        include_once $templatePath;
-        return ob_get_clean();
+        return $this->templates[$templateName]->render($data);
     }
 }

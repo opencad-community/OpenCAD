@@ -31,10 +31,12 @@ class ApiRolePermission
      */
     public function getAllApiRolePermissions()
     {
-        $stmt = $this->database->prepare('SELECT rp.*, r.name AS role_name, p.name AS permission_name 
+        $stmt = $this->database->prepare(
+            'SELECT rp.*, r.name AS role_name, p.name AS permission_name
         FROM api_role_permissions rp
         JOIN api_roles r ON rp.role_id = r.id
-        JOIN api_permissions p ON rp.permission_id = p.id');
+        JOIN api_permissions p ON rp.permission_id = p.id'
+        );
         $this->database->executeStatement($stmt);
         return $this->database->resultSet($stmt);
     }
@@ -56,14 +58,17 @@ class ApiRolePermission
 
     /**
      * Adds a new api role permission to the api_role_permissions table.
-     * 
+     *
      * @param array $data An array of api role permission data, including api_role_id and api_permission_id.
-     * 
+     *
      * @return int The ID of the newly inserted api role permission.
      */
     public function addApiRolePermissions($data)
     {
-        $stmt = $this->database->prepare('INSERT INTO api_role_permissions (api_role_id, api_permission_id) VALUES (:api_role_id, :api_permission_id)');
+        $stmt = $this->database->prepare(
+            'INSERT INTO api_role_permissions (api_role_id, api_permission_id)
+            VALUES (:api_role_id, :api_permission_id)'
+        );
         $stmt->bindParam(':api_role_id', $data['api_role_id'], \PDO::PARAM_INT);
         $stmt->bindParam(':api_permission_id', $data['api_permission_id'], \PDO::PARAM_INT);
         $this->database->executeStatement($stmt);
@@ -72,15 +77,19 @@ class ApiRolePermission
 
     /**
      * Updates an existing api role permission in the api_role_permissions table.
-     * 
+     *
      * @param int $id The ID of the api role permission to be updated.
      * @param array $data An array of api role permission data, including api_role_id and api_permission_id.
-     * 
+     *
      * @return bool Returns true if the api role permission was successfully updated, false otherwise.
      */
     public function updateApiRolePermissions($id, $data)
     {
-        $stmt = $this->database->prepare('UPDATE api_role_permissions SET api_role_id = :api_role_id, api_permission_id = :api_permission_id WHERE id = :id');
+        $stmt = $this->database->prepare(
+            'UPDATE api_role_permissions
+            SET api_role_id = :api_role_id, api_permission_id = :api_permission_id
+            WHERE id = :id'
+        );
         $stmt->bindParam(':id', $id, \PDO::PARAM_INT);
         $stmt->bindParam(':api_role_id', $data['api_role_id'], \PDO::PARAM_INT);
         $stmt->bindParam(':api_permission_id', $data['api_permission_id'], \PDO::PARAM_INT);
