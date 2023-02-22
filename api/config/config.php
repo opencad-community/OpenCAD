@@ -1,5 +1,14 @@
 <?php
-
+/**
+ * When using open source code, remember that the author invested time and effort into creating it for others.
+ * Many licenses require crediting the original author via code or documentation.
+ * Respect these requirements and avoid changing or removing attribution statements.
+ * Doing so violates the license and constitutes plagiarism, which can harm the author's reputation.
+ * To support the open source community, comply with the license and respect the author's rights.
+ * Please do NOT remove the accreditation to the author.
+ * This project is licensed for use by The OpenCAD project and any user who wishes to modify it,
+ * but the end user is not allowed to claim the original work as their own.
+ */
 return [
     'app' => [
         'title' => 'OpenCAD API',
@@ -9,9 +18,9 @@ return [
         'project_github' => 'https://github.com/opencad-app/opencad-nextgen',
         'author' => [
             'name' => 'Kevin Gorman',
-            'email'=> 'kgorman436@gmail.com',
-            'discord'=>'Kevingorman1000#0625',
-            'github'=>'https://github.com/kevingorman1000'
+            'email' => 'kgorman436@gmail.com',
+            'discord' => 'Kevingorman1000#0625',
+            'github' => 'https://github.com/kevingorman1000'
         ]
     ]
 ];
