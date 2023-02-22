@@ -2,7 +2,9 @@
 
 namespace Opencad\App\Routing;
 
-use Exception;
+use Opencad\App\Helpers\Exceptions\Generic\InternalServerErrorException;
+use Opencad\App\Helpers\Exceptions\Router\ControllerClassNotFoundException;
+use Opencad\App\Helpers\Exceptions\Router\ControllerMethodNotFoundException;
 
 class Router
 {
@@ -31,17 +33,17 @@ class Router
               $controller->execute();
               return;
             } else {
-              throw new Exception("Controller method not found: execute()");
+              throw new ControllerMethodNotFoundException ("Controller method not found: execute()");
             }
           } else {
-            throw new Exception("Controller class not found: $controllerClass");
+            throw new ControllerClassNotFoundException ("Controller class not found: $controllerClass");
           }
         }
       }
 
       http_response_code(404);
       echo '404 Page Not Found';
-    } catch (Exception $e) {
+    } catch (InternalServerErrorException $e) {
       echo 'Error: ' . $e->getMessage();
     }
 

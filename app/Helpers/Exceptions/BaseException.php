@@ -42,7 +42,7 @@ class BaseException extends \Exception
     public static function exceptionHandler($exception)
     {
         // Log the exception message and stack trace to a file
-        $logFile = '../bin/logs/exception.log';
+        $logFile =  __DIR__ . '/../../../bin/logs/exception.log';
         $logMessage = "Exception: " . $exception->getMessage() . "\n";
         $logMessage .= "Stack trace: " . $exception->getTraceAsString() . "\n";
         $logMessage .= "File: " . $exception->getFile() . "\n";
