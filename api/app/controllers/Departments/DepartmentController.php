@@ -5,6 +5,7 @@ namespace App\Controllers\Departments;
 use Core\Request;
 use Core\Response;
 use App\Models\Departments\Departments;
+use Opencad\App\Helpers\Exceptions\Generic\InternalServerErrorException;
 
 /**
  * The DepartmentController class is responsible for handling HTTP requests related to the Departments model.
@@ -39,7 +40,7 @@ class DepartmentController
                 $response = Response::notFound('No departments found');
                 $response->send();
             }
-        } catch (\PDOException $e) {
+        } catch (InternalServerErrorException $e) {
             $response = Response::internalServerError($e->getMessage());
             $response->send();
         }
@@ -63,7 +64,7 @@ class DepartmentController
                 $response = Response::notFound("Department with ID {$id} not found");
                 $response->send();
             }
-        } catch (\PDOException $e) {
+        } catch (InternalServerErrorException $e) {
             $response = Response::internalServerError($e->getMessage());
             $response->send();
         }
@@ -87,7 +88,7 @@ class DepartmentController
                 $response = Response::badRequest('Error adding department');
                 $response->send();
             }
-        } catch (\PDOException $e) {
+        } catch (InternalServerErrorException $e) {
             $response = Response::internalServerError($e->getMessage());
             $response->send();
         }
@@ -112,7 +113,7 @@ class DepartmentController
                 $response = Response::badRequest("Error updating department with ID {$id}");
                 $response->send();
             }
-        } catch (\PDOException $e) {
+        } catch (InternalServerErrorException $e) {
             $response = Response::internalServerError($e->getMessage());
             $response->send();
         }
@@ -136,7 +137,7 @@ class DepartmentController
                 $response = Response::notFound("Department with ID {$id} not found");
                 $response->send();
             }
-        } catch (\PDOException $e) {
+        } catch (InternalServerErrorException $e) {
             $response = Response::internalServerError($e->getMessage());
             $response->send();
         }

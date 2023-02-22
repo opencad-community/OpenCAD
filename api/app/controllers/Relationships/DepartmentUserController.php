@@ -5,6 +5,7 @@ namespace App\Controllers\Relationships;
 use Exception;
 use Core\Response;
 use App\Models\Relationships\UserDepartmentModel;
+use Opencad\App\Helpers\Exceptions\Generic\InternalServerErrorException;
 
 class DepartmentUserController
 {
@@ -43,7 +44,7 @@ class DepartmentUserController
                 $response = Response::notFound("Department or user not found");
                 $response->send();
             }
-        } catch (\PDOException $e) {
+        } catch (InternalServerErrorException $e) {
             // If an exception is thrown, send an internal server error response with the message from the exception.
             $response = Response::internalServerError($e->getMessage());
             $response->send();
@@ -73,7 +74,7 @@ class DepartmentUserController
                 $response = Response::notFound("User not found in department");
                 $response->send();
             }
-        } catch (\PDOException $e) {
+        } catch (InternalServerErrorException $e) {
             // If an exception is thrown, return an internal server error to the client
             $response = Response::internalServerError($e->getMessage());
             $response->send();
@@ -102,7 +103,7 @@ class DepartmentUserController
                 $response = Response::notFound("No users found in department");
                 $response->send();
             }
-        } catch (Exception $e) {
+        } catch (InternalServerErrorException $e) {
             // If an exception was thrown, create an internal server error response with the exception message
             $response = Response::internalServerError($e->getMessage());
             $response->send();
@@ -133,7 +134,7 @@ class DepartmentUserController
                 $response = Response::notFound("User is not in any departments");
                 $response->send();
             }
-        } catch (Exception $e) {
+        } catch (InternalServerErrorException $e) {
             // If an exception was thrown, return an internal server error response with the exception message
             $response = Response::internalServerError($e->getMessage());
             $response->send();

@@ -10,6 +10,7 @@
  * but the end user is not allowed to claim the original work as their own.
  */
 return [
+    'debug' => true,
     'app' => [
         'title' => 'OpenCAD API',
         'version' => '0.0.1',

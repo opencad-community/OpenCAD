@@ -7,6 +7,7 @@ use Core\Request;
 use PDOException;
 use Core\Response;
 use App\Models\Game\GTAV\Citations\CitationsModel;
+use Opencad\App\Helpers\Exceptions\Generic\InternalServerErrorException;
 
 class CitationsController
 {
@@ -31,7 +32,7 @@ class CitationsController
                 $response = Response::notFound("No citations found");
                 $response->send();
             }
-        } catch (Exception $e) {
+        } catch (InternalServerErrorException $e) {
             $response = Response::internalServerError($e->getMessage());
             $response->send();
         }
@@ -55,7 +56,7 @@ class CitationsController
                 $response = Response::notFound("Citation with ID {$id} not found");
                 $response->send();
             }
-        } catch (Exception $e) {
+        } catch (InternalServerErrorException $e) {
             $response = Response::internalServerError($e->getMessage());
             $response->send();
         }
@@ -80,7 +81,7 @@ class CitationsController
                 $response = Response::error("Error adding citation");
                 $response->send();
             }
-        } catch (Exception $e) {
+        } catch (InternalServerErrorException $e) {
             $response = Response::internalServerError($e->getMessage());
             $response->send();
         }
@@ -106,7 +107,7 @@ class CitationsController
                 $response = Response::notFound("Citation with ID {$id} not found");
                 $response->send();
             }
-        } catch (PDOException $e) {
+        } catch (InternalServerErrorException $e) {
             $response = Response::internalServerError($e->getMessage());
             $response->send();
         }
@@ -135,7 +136,7 @@ class CitationsController
                 // Send the response to the client
                 $response->send();
             }
-        } catch (Exception $e) {
+        } catch (InternalServerErrorException $e) {
             // If an exception was thrown, create an internal server error response object with the exception message
             $response = Response::internalServerError($e->getMessage());
             // Send the response to the client

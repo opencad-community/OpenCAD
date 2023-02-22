@@ -5,6 +5,11 @@ namespace Core;
 use PDO;
 use Exception;
 use PDOStatement;
+use Opencad\App\Helpers\Exceptions\DB\ExecutionFailedException;
+use Opencad\App\Helpers\Exceptions\DB\FetchingResultFailedException;
+use Opencad\App\Helpers\Exceptions\DB\InvalidDatabaseLoginException;
+use Opencad\App\Helpers\Exceptions\DB\PrepareStatementErrorException;
+use Opencad\App\Helpers\Exceptions\DB\InvalidDatabaseConfigurationException;
 
 class Database
 {
@@ -61,18 +66,18 @@ class Database
     {
         try {
             $config = require __DIR__ . "/../config/database.php";
-    
+
             $host = $config['host'] ?? null;
             $dbname = $config['dbname'] ?? null;
 
             if ($host === null || $dbname === null) {
-                throw new Exception('Invalid database configuration');
+                throw new InvalidDatabaseConfigurationException('Invalid database configuration');
             }
-    
+
             $dsn = "mysql:host={$host};dbname={$dbname}";
             $username = $config['username'] ?? '';
             $password = $config['password'] ?? '';
-    
+
             if (!self::$instance) {
                 self::$instance = new self($dsn, $username, $password);
             }
@@ -80,22 +85,22 @@ class Database
         } catch (\PDOException $e) {
             // Log the error message to the console
             error_log($e->getMessage());
-            throw new Exception('Database connection error');
+            throw new InvalidDatabaseLoginException('Database connection error');
         }
     }
-    
+
     /**
      * Prepares a SQL statement for execution.
      *
      * @param string $sql The SQL statement to prepare.
      * @return PDOStatement
-     * @throws \PDOException
+     * @throws PrepareStatementErrorException
      */
     public function prepare(string $sql)
     {
         try {
             return $this->pdo->prepare($sql);
-        } catch (\PDOException $e) {
+        } catch (PrepareStatementErrorException $e) {
             // Log the error or perform other error handling as needed
             error_log($e->getMessage());
             throw $e;
@@ -113,10 +118,10 @@ class Database
         try {
             $result = $stmt->execute();
             if ($result === false) {
-                throw new Exception('Query execution failed');
+                throw new ExecutionFailedException('Query execution failed');
             }
             return $result;
-        } catch (Exception $e) {
+        } catch (ExecutionFailedException $e) {
             // Log the error or perform other error handling as needed
             error_log($e->getMessage());
             return false;
@@ -134,10 +139,10 @@ class Database
         try {
             $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
             if ($results === false) {
-                throw new Exception('Fetching results failed');
+                throw new FetchingResultFailedException('Fetching results failed');
             }
             return $results;
-        } catch (Exception $e) {
+        } catch (FetchingResultFailedException $e) {
             // Log the error or perform other error handling as needed
             error_log($e->getMessage());
             return false;

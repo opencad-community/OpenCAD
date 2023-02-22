@@ -6,6 +6,7 @@ use Core\Request;
 use Core\Database;
 use Core\Response;
 use App\Core\TokenAuth;
+use Opencad\App\Helpers\Exceptions\Generic\InternalServerErrorException;
 
 class AuthController
 {
@@ -68,7 +69,7 @@ class AuthController
                 $response = Response::error('Invalid email or password');
                 $response->send();
             }
-        } catch (\Exception $e) {
+        } catch (InternalServerErrorException $e) {
             // If an error occurs, send an error response with the exception message
             $response = Response::error($e->getMessage());
             $response->send();

@@ -9,6 +9,8 @@ use Core\Response;
 use App\Models\User\User;
 use Opencad\App\Session\Session;
 use App\Models\Relationships\UserDepartmentModel;
+use Opencad\App\Helpers\Exceptions\Generic\UserDoesntExistException;
+use Opencad\App\Helpers\Exceptions\Generic\InternalServerErrorException;
 
 /**
  * The UserController class is responsible for handling requests related to the User model.
@@ -52,7 +54,7 @@ class UserController
                 $response = Response::notFound("No users found");
                 $response->send();
             }
-        } catch (Exception $e) {
+        } catch (InternalServerErrorException $e) {
             // If an exception was thrown, send an internal server error response with the error message
             $response = Response::internalServerError($e->getMessage());
             $response->send();
@@ -81,14 +83,12 @@ class UserController
                 $response = Response::notFound("User with ID {$id} not found");
                 $response->send();
             }
-        } catch (Exception $e) {
+        } catch (InternalServerErrorException $e) {
             // If an exception is caught, send an internal server error response with the exception message
             $response = Response::internalServerError($e->getMessage());
             $response->send();
         }
     }
-
-
 
     /**
      * Creates a new user
@@ -118,7 +118,7 @@ class UserController
                 $response = Response::error("Error adding user");
                 $response->send();
             }
-        } catch (Exception $e) {
+        } catch (InternalServerErrorException $e) {
             // If there is an exception, send an internal server error response with the error message
             $response = Response::internalServerError($e->getMessage());
             $response->send();
@@ -151,7 +151,7 @@ class UserController
                 $response = Response::notFound("User with ID {$id} not found");
                 $response->send();
             }
-        } catch (PDOException $e) {
+        } catch (InternalServerErrorException $e) {
             // Catch any exceptions thrown and return an internal server error response with the exception message
             $response = Response::internalServerError($e->getMessage());
             $response->send();
@@ -184,7 +184,7 @@ class UserController
                 // Send the response to the client
                 $response->send();
             }
-        } catch (Exception $e) {
+        } catch (InternalServerErrorException $e) {
             // If an exception was thrown, create an internal server error response object with the exception message
             $response = Response::internalServerError($e->getMessage());
             // Send the response to the client
@@ -218,7 +218,7 @@ class UserController
             try {
                 // Verify the email and password using the User model
                 $user = $this->userModel->verifyUser($email);
-            } catch (PDOException $e) {
+            } catch (UserDoesntExistException $e) {
                 error_log("Error Occured: " . $e->getMessage());
             }
 
@@ -254,7 +254,7 @@ class UserController
                 $response = Response::unauthorized("Invalid email or password");
                 $response->send();
             }
-        } catch (Exception $e) {
+        } catch (InternalServerErrorException $e) {
             // If an exception is caught, return an internal server error response with the exception message
             $response = Response::internalServerError($e->getMessage());
             $response->send();

@@ -5,6 +5,7 @@ namespace App\Controllers\Api;
 use Core\Request;
 use Core\Response;
 use App\Models\Api\ApiRole;
+use Opencad\App\Helpers\Exceptions\Generic\InternalServerErrorException;
 
 /**
  * The ApiRoleController class is responsible for handling requests related to the ApiRole model.
@@ -45,7 +46,7 @@ class ApiRoleController
                 $response = Response::notFound("No api roles found");
                 $response->send();
             }
-        } catch (\PDOException $e) {
+        } catch (InternalServerErrorException $e) {
             // If an exception was thrown, send an internal server error response with the error message
             $response = Response::internalServerError($e->getMessage());
             $response->send();
@@ -73,7 +74,7 @@ class ApiRoleController
                 $response = Response::notFound("Api role with ID {$id} not found");
                 $response->send();
             }
-        } catch (\PDOException $e) {
+        } catch (InternalServerErrorException $e) {
             // If an exception is caught, send an internal server error response with the exception message
             $response = Response::internalServerError($e->getMessage());
             $response->send();
@@ -109,7 +110,7 @@ class ApiRoleController
                 $response = Response::error("Error adding API role");
                 $response->send();
             }
-        } catch (\PDOException $e) {
+        } catch (InternalServerErrorException $e) {
             // If there is an exception, send an internal server error response with the error message
             $response = Response::internalServerError($e->getMessage());
             $response->send();
@@ -140,7 +141,7 @@ class ApiRoleController
                 $response = Response::notFound("API role with ID {$id} not found");
                 $response->send();
             }
-        } catch (\PDOException $e) {
+        } catch (InternalServerErrorException $e) {
             // Catch any exceptions thrown and send an internal server error response with the exception message
             $response = Response::internalServerError($e->getMessage());
             $response->send();
@@ -171,7 +172,7 @@ class ApiRoleController
                 // Send the response to the client
                 $response->send();
             }
-        } catch (\PDOException $e) {
+        } catch (InternalServerErrorException $e) {
             // If an exception was thrown, create an internal server error response object with the exception message
             $response = Response::internalServerError($e->getMessage());
             // Send the response to the client

@@ -2,6 +2,7 @@
 namespace App\Models\Departments;
 
 use Core\Database;
+use Opencad\App\Helpers\Exceptions\DB\SqlErrorOccuredException;
 
 class Departments
 {
@@ -145,7 +146,7 @@ class Departments
             $stmt = $this->database->prepare('DELETE FROM departments WHERE id = :id');
             $stmt->bindParam(':id', $id, \PDO::PARAM_INT);
             return $this->database->executeStatement($stmt);
-        } catch (\PDOException $e) {
+        } catch (SqlErrorOccuredException $e) {
             // Log the error message to the console
             error_log($e->getMessage());
             return false;

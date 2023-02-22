@@ -2,6 +2,8 @@
 
 namespace Opencad\App\Templating;
 
+use Opencad\App\Helpers\Exceptions\Templating\TemplateDirectoryNotFoundException;
+
 class Template
 {
     protected $templateDir;
@@ -42,7 +44,7 @@ class Template
     {
         $templatePath = $this->templateDir . '/' . $this->templateName . $this->extension;
         if (!file_exists($templatePath)) {
-            throw new \Exception("Template file not found: $templatePath");
+            throw new TemplateDirectoryNotFoundException("Template file not found: $templatePath");
         }
 
         $content = file_get_contents($templatePath);

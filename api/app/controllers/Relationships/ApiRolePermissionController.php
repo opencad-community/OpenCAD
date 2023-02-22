@@ -6,6 +6,7 @@ use Exception;
 use Core\Request;
 use Core\Response;
 use App\Models\Relationships\ApiRolePermission;
+use Opencad\App\Helpers\Exceptions\Generic\InternalServerErrorException;
 
 class ApiRolePermissionController
 {
@@ -37,7 +38,7 @@ class ApiRolePermissionController
                 $response = Response::notFound("No api role permissions found");
                 $response->send();
             }
-        } catch (Exception $e) {
+        } catch (InternalServerErrorException $e) {
             // If an exception occurs, create an internal server error response and send it to the client
             $response = Response::internalServerError($e->getMessage());
             $response->send();
@@ -65,7 +66,7 @@ class ApiRolePermissionController
                 $response = Response::notFound("API role permission with ID {$id} not found");
                 $response->send();
             }
-        } catch (Exception $e) {
+        } catch (InternalServerErrorException $e) {
             // If an exception is caught, send an internal server error response with the exception message
             $response = Response::internalServerError($e->getMessage());
             $response->send();
@@ -99,7 +100,7 @@ class ApiRolePermissionController
                 $response = Response::error("Error adding api role permissions");
                 $response->send();
             }
-        } catch (Exception $e) {
+        } catch (InternalServerErrorException $e) {
             // If an exception occurs, create an internal server error response and send it to the client
             $response = Response::internalServerError($e->getMessage());
             $response->send();
@@ -132,7 +133,7 @@ class ApiRolePermissionController
                 $response = Response::notFound("Api role permissions not found");
                 $response->send();
             }
-        } catch (Exception $e) {
+        } catch (InternalServerErrorException $e) {
             // If an exception occurs, create an internal server error response and send it to the client
             $response = Response::internalServerError($e->getMessage());
             $response->send();
@@ -164,7 +165,7 @@ class ApiRolePermissionController
                 $response = Response::notFound("Api role permissions not found");
                 $response->send();
             }
-        } catch (Exception $e) {
+        } catch (InternalServerErrorException $e) {
             // If an exception occurs, create an internal server error response and send it to the client
             $response = Response::internalServerError($e->getMessage());
             $response->send();

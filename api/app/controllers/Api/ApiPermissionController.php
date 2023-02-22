@@ -2,10 +2,11 @@
 
 namespace App\Controllers\Api;
 
-use App\Models\Api\ApiPermissions;
+use Exception;
 use Core\Request;
 use Core\Response;
-use Exception;
+use App\Models\Api\ApiPermissions;
+use Opencad\App\Helpers\Exceptions\Generic\InternalServerErrorException;
 
 /**
  * The ApiPermissionController class is responsible for handling requests related to the ApiPermission model.
@@ -47,7 +48,7 @@ class ApiPermissionController
                 $response = Response::notFound("No api permissions found");
                 $response->send();
             }
-        } catch (Exception $e) {
+        } catch (InternalServerErrorException $e) {
             // If an exception was thrown, send an internal server error response with the error message
             $response = Response::internalServerError($e->getMessage());
             $response->send();
@@ -75,7 +76,7 @@ class ApiPermissionController
                 $response = Response::notFound("Api permission with ID {$id} not found");
                 $response->send();
             }
-        } catch (Exception $e) {
+        } catch (InternalServerErrorException $e) {
             // If an exception is caught, send an internal server error response with the exception message
             $response = Response::internalServerError($e->getMessage());
             $response->send();
@@ -106,7 +107,7 @@ class ApiPermissionController
                 $response = Response::error("Error adding API permission");
                 $response->send();
             }
-        } catch (Exception $e) {
+        } catch (InternalServerErrorException $e) {
             // If there is an exception, send an internal server error response with the error message
             $response = Response::internalServerError($e->getMessage());
             $response->send();
@@ -137,7 +138,7 @@ class ApiPermissionController
                 $response = Response::notFound("API permission with ID {$id} not found");
                 $response->send();
             }
-        } catch (Exception $e) {
+        } catch (InternalServerErrorException $e) {
             // If there is an exception, return an internal server error response with the exception message
             $response = Response::internalServerError($e->getMessage());
             $response->send();
@@ -169,7 +170,7 @@ class ApiPermissionController
                 // Send the response to the client
                 $response->send();
             }
-        } catch (Exception $e) {
+        } catch (InternalServerErrorException $e) {
             // If an exception was thrown, create an internal server error response object with the exception message
             $response = Response::internalServerError($e->getMessage());
             // Send the response to the client

@@ -3,6 +3,8 @@
 namespace App\Models\Relationships;
 
 use Core\Database;
+use Opencad\App\Helpers\Exceptions\DB\SqlErrorOccuredException;
+use Opencad\App\Helpers\Exceptions\DB\DBConnectionErrorException;
 
 define("USER_ID", ":user_id");
 define("DEPART_ID", ":department_id");
@@ -29,7 +31,7 @@ class UserDepartmentModel
     {
         try {
             $this->database = Database::getInstance();
-        } catch (\PDOException $e) {
+        } catch (DBConnectionErrorException $e) {
             // Log the error message to the console
             error_log($e->getMessage());
             // Rethrow the exception to be handled in the calling code
@@ -57,7 +59,7 @@ class UserDepartmentModel
             $stmt->bindParam(DEPART_ID, $departmentId, \PDO::PARAM_INT);
             $this->database->executeStatement($stmt);
             return true;
-        } catch (\PDOException $e) {
+        } catch (SqlErrorOccuredException $e) {
             // Log the error message to the console
             error_log($e->getMessage());
             throw $e;
@@ -84,7 +86,7 @@ class UserDepartmentModel
             $stmt->bindParam(DEPART_ID, $departmentId, \PDO::PARAM_INT);
             $this->database->executeStatement($stmt);
             return true;
-        } catch (\PDOException $e) {
+        } catch (SqlErrorOccuredException $e) {
             // Log the error message to the console
             error_log($e->getMessage());
             throw $e;
@@ -117,7 +119,7 @@ class UserDepartmentModel
             } else {
                 return [];
             }
-        } catch (\Exception $e) {
+        } catch (SqlErrorOccuredException $e) {
             error_log("Error getting users in department: " . $e->getMessage());
             throw $e;
         }
@@ -149,7 +151,7 @@ class UserDepartmentModel
             } else {
                 return [];
             }
-        } catch (\Exception $e) {
+        } catch (SqlErrorOccuredException $e) {
             error_log("Error getting departments for user: " . $e->getMessage());
             throw $e;
         }

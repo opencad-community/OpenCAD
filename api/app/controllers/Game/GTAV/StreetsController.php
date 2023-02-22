@@ -5,6 +5,7 @@ namespace App\Controllers\Game\GTAV;
 use Core\Request;
 use Core\Response;
 use App\Models\Game\GTAV\StreetModel;
+use Opencad\App\Helpers\Exceptions\Generic\InternalServerErrorException;
 
 class StreetsController
 {
@@ -31,7 +32,7 @@ class StreetsController
                 $response = Response::notFound('No streets found');
                 $response->send();
             }
-        } catch (\PDOException $e) {
+        } catch (InternalServerErrorException $e) {
             $response = Response::internalServerError($e->getMessage());
             $response->send();
         }
@@ -54,7 +55,7 @@ class StreetsController
                 $response = Response::notFound("Street with ID {$id} not found");
                 $response->send();
             }
-        } catch (\PDOException $e) {
+        } catch (InternalServerErrorException $e) {
             $response = Response::internalServerError($e->getMessage());
             $response->send();
         }
@@ -78,7 +79,7 @@ class StreetsController
                 $response = Response::badRequest('Error adding Street. Check Error Log');
                 $response->send();
             }
-        } catch (\PDOException $e) {
+        } catch (InternalServerErrorException $e) {
             $response = Response::internalServerError($e->getMessage());
             $response->send();
         }
@@ -98,7 +99,7 @@ class StreetsController
             $this->streetModel->updateStreet($id, $data);
             $response = Response::success("Street updated successfully");
             $response->send();
-        } catch (\PDOException $e) {
+        } catch (InternalServerErrorException $e) {
             $response = Response::internalServerError($e->getMessage());
             $response->send();
         }
@@ -115,7 +116,7 @@ class StreetsController
             $this->streetModel->deleteStreet($id);
             $response = Response::success("Street deleted successfully");
             $response->send();
-        } catch (\PDOException $e) {
+        } catch (InternalServerErrorException $e) {
             $response = Response::internalServerError($e->getMessage());
             $response->send();
         }

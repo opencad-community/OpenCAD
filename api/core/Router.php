@@ -2,7 +2,12 @@
 
 namespace Core;
 
-use Exception;
+use Core\Response;
+use Opencad\App\Helpers\Exceptions\Router\AddException;
+use Opencad\App\Helpers\Exceptions\Router\UseException;
+use Opencad\App\Helpers\Exceptions\Router\MatchException;
+use Opencad\App\Helpers\Exceptions\Router\DispatchException;
+use Opencad\App\Helpers\Exceptions\Middleware\MiddlewareException;
 
 class Router
 {
@@ -21,7 +26,7 @@ class Router
      * @param array $params An array of parameters for the route, including the controller and action
      * @param array $middlewares An array of middlewares for the route (optional)
      *
-     * @throws Exception If an error occurs while adding the route
+     * @throws AddException If an error occurs while adding the route
      *
      * @return void
      */
@@ -37,7 +42,7 @@ class Router
 
             // Add the route and its parameters to the array of routes
             $this->routes[$route] = $params;
-        } catch (Exception $e) {
+        } catch (AddException $e) {
             // Log the error message
             error_log("Error adding route: " . $e->getMessage());
 
@@ -56,12 +61,12 @@ class Router
      *
      * @return void
      */
-    public function use($middleware)
+    public function use ($middleware)
     {
         try {
             $this->middlewares[] = $middleware;
 
-        } catch (Exception $e) {
+        } catch (UseException $e) {
             // If an error occurs, log the error message
             error_log($e->getMessage());
         }
@@ -74,7 +79,7 @@ class Router
      *
      * @return array|bool The parameters for the route if a match is found, or false if no match is found
      */
-    public function match($url)
+    public function match ($url)
     {
         try {
             // Loop through each route in the array of routes
@@ -93,7 +98,7 @@ class Router
 
             // If no match is found, return false
             return false;
-        } catch (Exception $e) {
+        } catch (MatchException $e) {
             // If an error occurs, log the error message
             error_log($e->getMessage());
 
@@ -131,14 +136,14 @@ class Router
                     try {
                         // Call the handle method on the middleware
                         $middleware->handle();
-                    } catch (Exception $e) {
+                    } catch (MiddlewareException $e) {
                         // If an exception is caught, send an error response and stop the middleware chain
                         $response = Response::error($e->getMessage());
                         $response->send();
                         return;
                     }
                 }
-                
+
                 // Create an instance of the controller
                 $controller = "$namespace$controller";
                 $controller = new $controller();
@@ -151,7 +156,7 @@ class Router
                 $controller = new $controller();
                 $controller->index();
             }
-        } catch (Exception $e) {
+        } catch (DispatchException $e) {
             // If an exception is caught, send an error response with the exception message
             $response = Response::error($e->getMessage());
             $response->send();

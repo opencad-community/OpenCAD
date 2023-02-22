@@ -7,6 +7,7 @@ use Core\Response;
 use App\Models\Game\GTAV\NCIC\NCICUser;
 use App\Models\Game\GTAV\NCIC\NCICAttribute;
 use App\Models\Game\GTAV\NCIC\NCICUserAttribute;
+use Opencad\App\Helpers\Exceptions\Generic\InternalServerErrorException;
 
 /**
  * The NCICController class is responsible for handling requests related to the
@@ -68,7 +69,7 @@ class NCICController
                 $response = Response::notFound("No NCIC users found");
                 $response->send();
             }
-        } catch (\PDOException $e) {
+        } catch (InternalServerErrorException $e) {
             // If a database error occurred, send an internal server error response with the error message
             $response = Response::internalServerError($e->getMessage());
             $response->send();
@@ -120,7 +121,7 @@ class NCICController
                 $response = Response::notFound("NCIC user with ID {$id} not found");
                 $response->send();
             }
-        } catch (\PDOException $e) {
+        } catch (InternalServerErrorException $e) {
             // If a database error occurred, send an internal server error response with the error message
             $response = Response::internalServerError($e->getMessage());
             $response->send();
@@ -158,7 +159,7 @@ class NCICController
                 $response = Response::error("Error adding NCIC user");
                 $response->send();
             }
-        } catch (\PDOException $e) {
+        } catch (InternalServerErrorException $e) {
             // If a database error occurred, send an internal server error response with the error message
             $response = Response::internalServerError($e->getMessage());
             $response->send();
@@ -184,7 +185,7 @@ class NCICController
                 $response = Response::error("Error adding NCIC attribute");
                 $response->send();
             }
-        } catch (\PDOException $e) {
+        } catch (InternalServerErrorException $e) {
             // If a database error occurred, send an internal server error response with the error message
             $response = Response::internalServerError($e->getMessage());
             $response->send();
@@ -215,7 +216,7 @@ class NCICController
                 $response = Response::notFound("NCIC user with ID {$id} not found");
                 $response->send();
             }
-        } catch (\PDOException $e) {
+        } catch (InternalServerErrorException $e) {
             // If a database error occurred, send an internal server error response with the error message
             $response = Response::internalServerError($e->getMessage());
             $response->send();
@@ -248,7 +249,7 @@ class NCICController
                 // Send the response to the client
                 $response->send();
             }
-        } catch (\PDOException $e) {
+        } catch (InternalServerErrorException $e) {
             // If a database error occurred, create an internal server error response object with the exception message
             $response = Response::internalServerError($e->getMessage());
             // Send the response to the client
@@ -277,7 +278,7 @@ class NCICController
                 $response = Response::notFound("No attributes found for NCIC user with ID {$id}");
                 $response->send();
             }
-        } catch (\PDOException $e) {
+        } catch (InternalServerErrorException $e) {
             // If a database error occurred, create an internal server error response object with the exception message
             $response = Response::internalServerError($e->getMessage());
             // Send the response to the client
@@ -306,7 +307,7 @@ class NCICController
                 $response = Response::notFound("No attributes found");
                 $response->send();
             }
-        } catch (\PDOException $e) {
+        } catch (InternalServerErrorException $e) {
             // If a database error occurred, create an internal server error response object with the exception message
             $response = Response::internalServerError($e->getMessage());
             // Send the response to the client
@@ -344,7 +345,7 @@ class NCICController
                 $response = Response::error("Error adding attribute");
                 $response->send();
             }
-        } catch (\PDOException $e) {
+        } catch (InternalServerErrorException $e) {
             // If a database error occurred, send an internal server error response with the error message
             $response = Response::internalServerError($e->getMessage());
             $response->send();
@@ -376,7 +377,7 @@ class NCICController
                 $response = Response::notFound("Attribute with ID {$attributeId} not found");
                 $response->send();
             }
-        } catch (\PDOException $e) {
+        } catch (InternalServerErrorException $e) {
             // Catch any exceptions thrown and return an internal server error response with the exception message
             $response = Response::internalServerError($e->getMessage());
             $response->send();
@@ -412,7 +413,7 @@ class NCICController
                 );
                 $response->send();
             }
-        } catch (\PDOException $e) {
+        } catch (InternalServerErrorException $e) {
             // Catch any exceptions thrown and return an internal server error response with the exception message
             $response = Response::internalServerError($e->getMessage());
             $response->send();
@@ -448,7 +449,7 @@ class NCICController
                 // Send the response to the client
                 $response->send();
             }
-        } catch (\PDOException $e) {
+        } catch (InternalServerErrorException $e) {
             // If a database error occurred, create an internal server error response object with the exception message
             $response = Response::internalServerError($e->getMessage());
             // Send the response to the client
@@ -481,7 +482,7 @@ class NCICController
                 // Send the response to the client
                 $response->send();
             }
-        } catch (\PDOException $e) {
+        } catch (InternalServerErrorException $e) {
             // If a database error occurred, create an internal server error response object with the exception message
             $response = Response::internalServerError($e->getMessage());
             // Send the response to the client

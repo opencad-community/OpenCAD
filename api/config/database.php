@@ -2,7 +2,7 @@
 
 return [
     'host' => 'localhost',
-    'username' => 'root',
+    'username' => 'roo',
     'password' => '',
     'dbname' => 'oc_api',
 ];

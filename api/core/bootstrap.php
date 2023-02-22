@@ -1,7 +1,14 @@
 <?php
 
 require_once __DIR__ . "/../../vendor/autoload.php";
+$config = require_once __DIR__ . "/../config/config.php";
 
+
+if ($config["debug"]) {
+    error_reporting(1);
+} else {
+    error_reporting(0);
+}
 
 // Constants for the routes.
 define("USER_CONTROLLER", "User\UserController");
