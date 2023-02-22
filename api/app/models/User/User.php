@@ -100,4 +100,12 @@ class User
         return $this->database->executeStatement($stmt);
     }
 
+    public function verifyUser($email)
+    {
+        $stmt = $this->database->prepare('SELECT * FROM users WHERE email = :email');
+        $stmt->bindParam(':email', $email, \PDO::PARAM_STR);
+        $this->database->executeStatement($stmt);
+        return $this->database->resultSet($stmt);
+    }
+
 }

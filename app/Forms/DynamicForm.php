@@ -76,7 +76,7 @@ class DynamicForm {
         $data = [];
 
         foreach ($this->fields as $field) {
-            $data[$field['name']] = isset($_POST[$field['name']]) ? $_POST[$field['name']] : null;
+           htmlspecialchars($data[$field['name']] = isset($_POST[$field['name']]) ? $_POST[$field['name']] : null);
         }
 
         return $data;

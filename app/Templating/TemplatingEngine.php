@@ -36,7 +36,7 @@ class TemplatingEngine
 
         extract($data);
         ob_start();
-        include $templatePath;
+        include_once $templatePath;
         return ob_get_clean();
     }
 }

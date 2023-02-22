@@ -15,7 +15,7 @@ $router->add('/generate-token', ['controller' => 'Api\AuthController', 'action' 
 $router->add('/', ['controller' => 'HomeController', 'action' => 'index'], ["AuthMiddleware"]);
 
 // Group of routes for the user
-$router->group('/user', ["AuthMiddleware"], function () use ($router) {
+$router->group('/user', [], function () use ($router) {
     // Route for the user index page
     $router->add('', ['controller' => 'User\UserController', 'action' => 'index']);
     // Route for a specific user page
@@ -26,10 +26,12 @@ $router->group('/user', ["AuthMiddleware"], function () use ($router) {
     $router->add('/([0-9]+)/update', ['controller' => 'User\UserController', 'action' => 'update']);
     // Route for deleting an existing user
     $router->add('/([0-9]+)/delete', ['controller' => 'User\UserController', 'action' => 'delete']);
+    // Route for logging in user
+    $router->add("/login", ["controller" => "User\UserController", "action" => "login"]);
 });
 
 // Group of routes for departments
-$router->group('/departments', ["AuthMiddleware"], function () use ($router) {
+$router->group('/departments', [], function () use ($router) {
     // Route for the departments index page
     $router->add('', ['controller' => 'Departments\DepartmentController', 'action' => 'index']);
     // Route for creating a new department
@@ -102,7 +104,7 @@ $router->group('/ncic', ["AuthMiddleware"], function () use ($router) {
 
     // Route for managing attributes for a specific NCIC user
     $router->add('/user/([0-9]+)/attributes', ['controller' => 'Game\GTAV\NCIC\NCICController', 'action' => 'showUserAttributes']);
-    
+
 });
 
 
@@ -147,7 +149,6 @@ $router->group('/api-role-permissions', ["AuthMiddleware"], function () use ($ro
     // Route for deleting a specific api role permission
     $router->add('/role/([0-9]+)/perm/([0-9])/delete', ['controller' => 'Relationships\ApiRolePermissionController', 'action' => 'delete']);
 });
-
 
 // Dispatch the URL
 $router->dispatch($_SERVER['REQUEST_URI']);

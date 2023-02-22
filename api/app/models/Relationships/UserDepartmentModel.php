@@ -3,7 +3,7 @@
 namespace App\Models\Relationships;
 
 use Core\Database;
-use Core\Response;
+
 
 /**
  * Class UserDepartmentModel
@@ -13,19 +13,26 @@ use Core\Response;
  */
 class UserDepartmentModel
 {
-    /**
-     * @var \Core\Database $database An instance of the database class.
+   /**
+     * Instance of the database connection.
+     *
+     * @var Database
      */
     private $database;
 
     /**
-     * UserDepartmentModel constructor.
-     *
-     * Instantiates the database class to use for database operations.
+     * Creates a new instance of the User Department model.
      */
     public function __construct()
     {
-        $this->database = Database::getInstance();
+        try {
+            $this->database = Database::getInstance();
+        } catch (\PDOException $e) {
+            // Log the error message to the console
+            error_log($e->getMessage());
+            // Rethrow the exception to be handled in the calling code
+            throw $e;
+        }
     }
 
 
@@ -48,7 +55,7 @@ class UserDepartmentModel
         } catch (\PDOException $e) {
             // Log the error message to the console
             error_log($e->getMessage());
-            return false;
+            throw $e;
         }
     }
 
@@ -71,7 +78,7 @@ public function removeUserFromDepartment($userId, $departmentId)
     } catch (\PDOException $e) {
         // Log the error message to the console
         error_log($e->getMessage());
-        return false;
+        throw $e;
     }
 }
 
@@ -97,7 +104,7 @@ public function removeUserFromDepartment($userId, $departmentId)
             }
         } catch (\Exception $e) {
             error_log("Error getting users in department: " . $e->getMessage());
-            return [];
+            throw $e;
         }
     }
 
@@ -123,7 +130,7 @@ public function removeUserFromDepartment($userId, $departmentId)
             }
         } catch (\Exception $e) {
             error_log("Error getting departments for user: " . $e->getMessage());
-            return [];
+            throw $e;
         }
     }
 

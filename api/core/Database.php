@@ -59,18 +59,31 @@ class Database
      */
     public static function getInstance()
     {
-        $config = require_once __DIR__ . '/../config/database.php';
+        try {
+            $config = require __DIR__ . "/../config/database.php";
+    
+            $host = $config['host'] ?? null;
+            $dbname = $config['dbname'] ?? null;
 
-        $dsn = "mysql:host={$config['host']};dbname={$config['dbname']}";
-        $username = $config['username'];
-        $password = $config['password'];
-
-        if (!self::$instance) {
-            self::$instance = new self($dsn, $username, $password);
+            if ($host === null || $dbname === null) {
+                throw new Exception('Invalid database configuration');
+            }
+    
+            $dsn = "mysql:host={$host};dbname={$dbname}";
+            $username = $config['username'] ?? '';
+            $password = $config['password'] ?? '';
+    
+            if (!self::$instance) {
+                self::$instance = new self($dsn, $username, $password);
+            }
+            return self::$instance;
+        } catch (\PDOException $e) {
+            // Log the error message to the console
+            error_log($e->getMessage());
+            throw new Exception('Database connection error');
         }
-        return self::$instance;
     }
-
+    
     /**
      * Prepares a SQL statement for execution.
      *

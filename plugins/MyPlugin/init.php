@@ -8,9 +8,9 @@ class MyPlugin implements PluginInterface
 {
     public function execute()
     {
-        $this->addNavItemsWithChildren();
-        $this->addNavItemToHome();
-        $this->addNavItemToAboutUs();
+        // $this->addNavItemsWithChildren();
+        // $this->addNavItemToHome();
+        // $this->addNavItemToAboutUs();
     }
 
     public function addNavItemsWithChildren()
