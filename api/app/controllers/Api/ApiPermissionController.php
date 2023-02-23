@@ -2,10 +2,11 @@
 
 namespace App\Controllers\Api;
 
-use App\Models\Api\ApiPermissions;
+use Exception;
 use Core\Request;
 use Core\Response;
-use Exception;
+use App\Models\Api\ApiPermissions;
+use Opencad\App\Helpers\Exceptions\Generic\InternalServerErrorException;
 
 /**
  * The ApiPermissionController class is responsible for handling requests related to the ApiPermission model.
@@ -38,7 +39,8 @@ class ApiPermissionController
             // Get all api permissions from the database using the ApiPermission model
             $apiPermissions = $this->apiPermissionModel->getAllApiPermissions();
             if ($apiPermissions) {
-                // If the api permissions were retrieved successfully, send a success response with the api permissions data
+                // If the api permissions were retrieved successfully,
+                // send a success response with the api permissions data
                 $response = Response::success($apiPermissions);
                 $response->send();
             } else {
@@ -46,7 +48,7 @@ class ApiPermissionController
                 $response = Response::notFound("No api permissions found");
                 $response->send();
             }
-        } catch (Exception $e) {
+        } catch (InternalServerErrorException $e) {
             // If an exception was thrown, send an internal server error response with the error message
             $response = Response::internalServerError($e->getMessage());
             $response->send();
@@ -69,13 +71,12 @@ class ApiPermissionController
             if ($apiPermission) {
                 $response = Response::success($apiPermission);
                 $response->send();
-            }
-            // If api permission is not found, send a not found response with a custom message
-            else {
+            } else {
+                // If api permission is not found, send a not found response with a custom message
                 $response = Response::notFound("Api permission with ID {$id} not found");
                 $response->send();
             }
-        } catch (Exception $e) {
+        } catch (InternalServerErrorException $e) {
             // If an exception is caught, send an internal server error response with the exception message
             $response = Response::internalServerError($e->getMessage());
             $response->send();
@@ -96,7 +97,8 @@ class ApiPermissionController
             // Pass the permission data to the addPermission method in the ApiPermission model
             $id = $this->apiPermissionModel->addPermission($data);
 
-            // If the permission is successfully added, send a success response with the message "API permission added with ID {$id}"
+            // If the permission is successfully added,
+            // send a success response with the message "API permission added with ID {$id}"
             if ($id) {
                 $response = Response::success("API permission added with ID {$id}");
                 $response->send();
@@ -105,7 +107,7 @@ class ApiPermissionController
                 $response = Response::error("Error adding API permission");
                 $response->send();
             }
-        } catch (Exception $e) {
+        } catch (InternalServerErrorException $e) {
             // If there is an exception, send an internal server error response with the error message
             $response = Response::internalServerError($e->getMessage());
             $response->send();
@@ -136,7 +138,7 @@ class ApiPermissionController
                 $response = Response::notFound("API permission with ID {$id} not found");
                 $response->send();
             }
-        } catch (Exception $e) {
+        } catch (InternalServerErrorException $e) {
             // If there is an exception, return an internal server error response with the exception message
             $response = Response::internalServerError($e->getMessage());
             $response->send();
@@ -162,12 +164,13 @@ class ApiPermissionController
                 // Send the response to the client
                 $response->send();
             } else {
-                // If the API permission was not deleted, create a not found response object with a message indicating that the API permission was not found
+                // If the API permission was not deleted,
+                // create a not found response object with a message indicating that the API permission was not found
                 $response = Response::notFound("API permission with ID {$id} not found");
                 // Send the response to the client
                 $response->send();
             }
-        } catch (Exception $e) {
+        } catch (InternalServerErrorException $e) {
             // If an exception was thrown, create an internal server error response object with the exception message
             $response = Response::internalServerError($e->getMessage());
             // Send the response to the client

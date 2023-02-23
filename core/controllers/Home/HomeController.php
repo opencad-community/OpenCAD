@@ -8,18 +8,19 @@ use Opencad\App\Templating\TemplatingEngine;
 class HomeController
 {
 
-  protected $templating;
+  protected $templatingEngine;
   public function __construct()
   {
-    $this->templating = new TemplatingEngine();
+    $this->templatingEngine = new TemplatingEngine();
   }
   public function execute()
   {
-    $templating = new TemplatingEngine();
-    $html = $templating->render('index', [
-      'title' => 'My Page',
-      'doctype' => '<!DOCTYPE html>'
-    ]);
-    echo $html;
+    $data = [
+      'title' => 'Home',
+      'content' => 'Welcome to my app!',
+    ];
+
+    return $this->templatingEngine->render('index', $data);
+
   }
 }

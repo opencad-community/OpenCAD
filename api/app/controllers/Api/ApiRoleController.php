@@ -5,6 +5,7 @@ namespace App\Controllers\Api;
 use Core\Request;
 use Core\Response;
 use App\Models\Api\ApiRole;
+use Opencad\App\Helpers\Exceptions\Generic\InternalServerErrorException;
 
 /**
  * The ApiRoleController class is responsible for handling requests related to the ApiRole model.
@@ -45,7 +46,7 @@ class ApiRoleController
                 $response = Response::notFound("No api roles found");
                 $response->send();
             }
-        } catch (\PDOException $e) {
+        } catch (InternalServerErrorException $e) {
             // If an exception was thrown, send an internal server error response with the error message
             $response = Response::internalServerError($e->getMessage());
             $response->send();
@@ -68,13 +69,12 @@ class ApiRoleController
             if ($apiRole) {
                 $response = Response::success($apiRole);
                 $response->send();
-            }
-            // If api role is not found, send a not found response with a custom message
-            else {
+            } else {
+                // If api role is not found, send a not found response with a custom message
                 $response = Response::notFound("Api role with ID {$id} not found");
                 $response->send();
             }
-        } catch (\PDOException $e) {
+        } catch (InternalServerErrorException $e) {
             // If an exception is caught, send an internal server error response with the exception message
             $response = Response::internalServerError($e->getMessage());
             $response->send();
@@ -85,9 +85,9 @@ class ApiRoleController
      * Create a new API role
      *
      * This method creates a new API role by getting the role data from the input and passing it to the addRole method
-     * in the ApiRole model. If the role is successfully added, a success response is sent with the message "API role added
-     * with ID {$id}" where {$id} is the ID of the newly added role. If there is an error, an exception is thrown and
-     * a response with the error message is sent.
+     * in the ApiRole model. If the role is successfully added, success response is sent with the message "API role
+     * added * with ID {$id}" where {$id} is the ID of the newly added role.
+     * If there is an error, an exception is thrown and * a response with the error message is sent.
      *
      * @return void
      */
@@ -100,7 +100,8 @@ class ApiRoleController
             // Pass the role data to the addRole method in the ApiRole model
             $id = $this->apiRoleModel->addApiRole($data);
 
-            // If the role is successfully added, send a success response with the message "API role added with ID {$id}"
+            // If the role is successfully added
+            // send a success response with the message "API role added with ID {$id}"
             if ($id) {
                 $response = Response::success("API role added with ID {$id}");
                 $response->send();
@@ -109,7 +110,7 @@ class ApiRoleController
                 $response = Response::error("Error adding API role");
                 $response->send();
             }
-        } catch (\PDOException $e) {
+        } catch (InternalServerErrorException $e) {
             // If there is an exception, send an internal server error response with the error message
             $response = Response::internalServerError($e->getMessage());
             $response->send();
@@ -140,7 +141,7 @@ class ApiRoleController
                 $response = Response::notFound("API role with ID {$id} not found");
                 $response->send();
             }
-        } catch (\PDOException $e) {
+        } catch (InternalServerErrorException $e) {
             // Catch any exceptions thrown and send an internal server error response with the exception message
             $response = Response::internalServerError($e->getMessage());
             $response->send();
@@ -165,12 +166,13 @@ class ApiRoleController
                 // Send the response to the client
                 $response->send();
             } else {
-                // If the API role was not deleted, create a not found response object with a message indicating that the API role was not found
+                // If the API role was not deleted,
+                // create a not found response object with a message indicating that the API role was not found
                 $response = Response::notFound("API role with ID {$id} not found");
                 // Send the response to the client
                 $response->send();
             }
-        } catch (\PDOException $e) {
+        } catch (InternalServerErrorException $e) {
             // If an exception was thrown, create an internal server error response object with the exception message
             $response = Response::internalServerError($e->getMessage());
             // Send the response to the client

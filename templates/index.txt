@@ -1,3 +1,0 @@
-This is the template folder. It will hold all of the templates/views that is rended by the front end.
-
-It will hold all of the assets needed. This is the only folder that the user will need to update unless they are modifying the core code.

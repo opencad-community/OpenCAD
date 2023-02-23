@@ -53,9 +53,9 @@ class ApiRole
 
     /**
      * Adds a new api role to the api_roles table.
-     * 
+     *
      * @param array $data An array of api role data, including name and description.
-     * 
+     *
      * @return int The ID of the newly inserted api role.
      */
     public function addApiRole($data)
@@ -77,7 +77,9 @@ class ApiRole
      */
     public function updateApiRole($id, $data)
     {
-        $stmt = $this->database->prepare('UPDATE api_roles SET name = :name, description = :description WHERE id = :id');
+        $stmt = $this->database->prepare(
+            'UPDATE api_roles SET name = :name, description = :description WHERE id = :id'
+        );
         $stmt->bindParam(':id', $id, \PDO::PARAM_INT);
         $stmt->bindParam(':name', $data['name'], \PDO::PARAM_STR);
         $stmt->bindParam(':description', $data['description'], \PDO::PARAM_STR);

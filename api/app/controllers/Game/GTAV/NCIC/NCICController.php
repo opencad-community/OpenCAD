@@ -7,9 +7,13 @@ use Core\Response;
 use App\Models\Game\GTAV\NCIC\NCICUser;
 use App\Models\Game\GTAV\NCIC\NCICAttribute;
 use App\Models\Game\GTAV\NCIC\NCICUserAttribute;
+use Opencad\App\Helpers\Exceptions\Generic\InternalServerErrorException;
 
 /**
- * The NCICController class is responsible for handling requests related to the NCICUser, NCICAttribute, and NCICUserAttribute models.
+ * The NCICController class is responsible for handling requests related to the
+ * NCICUser,
+ * NCICAttribute,
+ * NCICUserAttribute models.
  *
  * @package App\Controllers\Game\GTAV\NCIC
  */
@@ -65,7 +69,7 @@ class NCICController
                 $response = Response::notFound("No NCIC users found");
                 $response->send();
             }
-        } catch (\PDOException $e) {
+        } catch (InternalServerErrorException $e) {
             // If a database error occurred, send an internal server error response with the error message
             $response = Response::internalServerError($e->getMessage());
             $response->send();
@@ -94,7 +98,7 @@ class NCICController
             if ($user) {
                 // Retrieve all attributes for the user
                 $attributes = $this->userAttributeModel->getAttributesForUser($user[0]["users_id"]);
-                
+
                 $attributesWithName = [];
                 // Loop through the attributes and get their name from the attributes table
                 foreach ($attributes as $attribute) {
@@ -106,18 +110,18 @@ class NCICController
                 }
                 // Add attributes to user data
                 $user['attributes'] = $attributesWithName;
-                
+
 
                 // Send response with user data including attributes
                 $response = Response::success($user);
                 $response->send();
-            }
-            // If user is not found, send a not found response with a custom message
-            else {
+            } else {
+                // If user is not found, send a not found response with a custom message
+
                 $response = Response::notFound("NCIC user with ID {$id} not found");
                 $response->send();
             }
-        } catch (\PDOException $e) {
+        } catch (InternalServerErrorException $e) {
             // If a database error occurred, send an internal server error response with the error message
             $response = Response::internalServerError($e->getMessage());
             $response->send();
@@ -129,7 +133,8 @@ class NCICController
      * Creates a new NCIC user
      *
      * This method creates a new NCIC user by getting the user data from the input and passing it to the addUser method
-     * in the NCICUser model. If the user is successfully added, a success response is sent with the message "NCIC user added
+     * in the NCICUser model. If the user is successfully added,
+     * a success response is sent with the message "NCIC user added
      * with ID {$id}" where {$id} is the ID of the newly added user. If there is an error, an exception is thrown and
      * a response with the error message is sent.
      *
@@ -144,7 +149,8 @@ class NCICController
             // Pass the user data to the addUser method in the NCICUser model
             $id = $this->userModel->addNCICUser($data);
 
-            // If the user is successfully added, send a success response with the message "NCIC user added with ID {$id}"
+            // If the user is successfully added,
+            // send a success response with the message "NCIC user added with ID {$id}"
             if ($id) {
                 $response = Response::success("NCIC user added with ID {$id}");
                 $response->send();
@@ -153,7 +159,7 @@ class NCICController
                 $response = Response::error("Error adding NCIC user");
                 $response->send();
             }
-        } catch (\PDOException $e) {
+        } catch (InternalServerErrorException $e) {
             // If a database error occurred, send an internal server error response with the error message
             $response = Response::internalServerError($e->getMessage());
             $response->send();
@@ -169,7 +175,8 @@ class NCICController
             // Pass the user data to the addUser method in the NCICUser model
             $id = $this->attributeModel->addAttribute($data);
 
-            // If the user is successfully added, send a success response with the message "NCIC user added with ID {$id}"
+            // If the user is successfully added,
+            // send a success response with the message "NCIC user added with ID {$id}"
             if ($id) {
                 $response = Response::success("NCIC attribute added with ID {$id}");
                 $response->send();
@@ -178,7 +185,7 @@ class NCICController
                 $response = Response::error("Error adding NCIC attribute");
                 $response->send();
             }
-        } catch (\PDOException $e) {
+        } catch (InternalServerErrorException $e) {
             // If a database error occurred, send an internal server error response with the error message
             $response = Response::internalServerError($e->getMessage());
             $response->send();
@@ -209,7 +216,7 @@ class NCICController
                 $response = Response::notFound("NCIC user with ID {$id} not found");
                 $response->send();
             }
-        } catch (\PDOException $e) {
+        } catch (InternalServerErrorException $e) {
             // If a database error occurred, send an internal server error response with the error message
             $response = Response::internalServerError($e->getMessage());
             $response->send();
@@ -236,12 +243,13 @@ class NCICController
                 // Send the response to the client
                 $response->send();
             } else {
-                // If the user was not deleted, create a not found response object with a message indicating that the user was not found
+                // If the user was not deleted,
+                // create a not found response object with a message indicating that the user was not found
                 $response = Response::notFound("NCIC user with ID {$id} not found");
                 // Send the response to the client
                 $response->send();
             }
-        } catch (\PDOException $e) {
+        } catch (InternalServerErrorException $e) {
             // If a database error occurred, create an internal server error response object with the exception message
             $response = Response::internalServerError($e->getMessage());
             // Send the response to the client
@@ -270,7 +278,7 @@ class NCICController
                 $response = Response::notFound("No attributes found for NCIC user with ID {$id}");
                 $response->send();
             }
-        } catch (\PDOException $e) {
+        } catch (InternalServerErrorException $e) {
             // If a database error occurred, create an internal server error response object with the exception message
             $response = Response::internalServerError($e->getMessage());
             // Send the response to the client
@@ -299,7 +307,7 @@ class NCICController
                 $response = Response::notFound("No attributes found");
                 $response->send();
             }
-        } catch (\PDOException $e) {
+        } catch (InternalServerErrorException $e) {
             // If a database error occurred, create an internal server error response object with the exception message
             $response = Response::internalServerError($e->getMessage());
             // Send the response to the client
@@ -312,7 +320,7 @@ class NCICController
      *
      * This method adds a new attribute to a specific NCIC user by getting the attribute data from the input and passing
      * it to the addUserAttribute method in the UserAttribute model. If the attribute is successfully added, a success
-     * response is sent with the message "Attribute added with ID {$id}" where {$id} is the ID of the newly added attribute.
+     * response is sent with message "Attribute added with ID {$id}" where {$id} is the ID of the newly added attribute.
      * If there is an error, an exception is thrown and a response with the error message is sent.
      *
      * @param int $id The id of the NCIC user
@@ -327,7 +335,8 @@ class NCICController
             // Pass the attribute data to the addUserAttribute method in the UserAttribute model
             $id = $this->userAttributeModel->addAttributeForUser($id, $data);
 
-            // If the attribute is successfully added, send a success response with the message "Attribute added with ID {$id}"
+            // If the attribute is successfully added,
+            // send a success response with the message "Attribute added with ID {$id}"
             if ($id) {
                 $response = Response::success("Attribute added with ID {$id}");
                 $response->send();
@@ -336,14 +345,14 @@ class NCICController
                 $response = Response::error("Error adding attribute");
                 $response->send();
             }
-        } catch (\PDOException $e) {
+        } catch (InternalServerErrorException $e) {
             // If a database error occurred, send an internal server error response with the error message
             $response = Response::internalServerError($e->getMessage());
             $response->send();
         }
     }
 
-/**
+    /**
      * Updates an attribute
      *
      * @param int $userId The ID of the NCIC user
@@ -368,7 +377,7 @@ class NCICController
                 $response = Response::notFound("Attribute with ID {$attributeId} not found");
                 $response->send();
             }
-        } catch (\PDOException $e) {
+        } catch (InternalServerErrorException $e) {
             // Catch any exceptions thrown and return an internal server error response with the exception message
             $response = Response::internalServerError($e->getMessage());
             $response->send();
@@ -393,14 +402,18 @@ class NCICController
 
             // If the update was successful, return a success response with a message
             if ($result) {
-                $response = Response::success("Attribute with ID {$attributeId} for NCIC user with ID {$userId} updated");
+                $response = Response::success(
+                    "Attribute with ID {$attributeId} for NCIC user with ID {$userId} updated"
+                );
                 $response->send();
             } else {
                 // If the update was not successful, return a not found response with an error message
-                $response = Response::notFound("Attribute with ID {$attributeId} for NCIC user with ID {$userId} not found");
+                $response = Response::notFound(
+                    "Attribute with ID {$attributeId} for NCIC user with ID {$userId} not found"
+                );
                 $response->send();
             }
-        } catch (\PDOException $e) {
+        } catch (InternalServerErrorException $e) {
             // Catch any exceptions thrown and return an internal server error response with the exception message
             $response = Response::internalServerError($e->getMessage());
             $response->send();
@@ -422,16 +435,21 @@ class NCICController
             // If the attribute was deleted successfully
             if ($result) {
                 // Create a success response object with a message indicating that the attribute was deleted
-                $response = Response::success("Attribute with ID {$attributeId} for NCIC user with ID {$userId} deleted");
+                $response = Response::success(
+                    "Attribute with ID {$attributeId} for NCIC user with ID {$userId} deleted"
+                );
                 // Send the response to the client
                 $response->send();
             } else {
-                // If the attribute was not deleted, create a not found response object with a message indicating that the attribute was not found
-                $response = Response::notFound("Attribute with ID {$attributeId} for NCIC user with ID {$userId} not found");
+                // If the attribute was not deleted,
+                // create a not found response object with a message indicating that the attribute was not found
+                $response = Response::notFound(
+                    "Attribute with ID {$attributeId} for NCIC user with ID {$userId} not found"
+                );
                 // Send the response to the client
                 $response->send();
             }
-        } catch (\PDOException $e) {
+        } catch (InternalServerErrorException $e) {
             // If a database error occurred, create an internal server error response object with the exception message
             $response = Response::internalServerError($e->getMessage());
             // Send the response to the client
@@ -439,7 +457,7 @@ class NCICController
         }
     }
 
-     /**
+    /**
      * Deletes an attribute from a specific NCIC user
      *
      * @param int $userId The id of the NCIC user
@@ -458,12 +476,13 @@ class NCICController
                 // Send the response to the client
                 $response->send();
             } else {
-                // If the attribute was not deleted, create a not found response object with a message indicating that the attribute was not found
+                // If the attribute was not deleted,
+                // create a not found response object with a message indicating that the attribute was not found
                 $response = Response::notFound("Attribute with ID {$attributeId} not found");
                 // Send the response to the client
                 $response->send();
             }
-        } catch (\PDOException $e) {
+        } catch (InternalServerErrorException $e) {
             // If a database error occurred, create an internal server error response object with the exception message
             $response = Response::internalServerError($e->getMessage());
             // Send the response to the client

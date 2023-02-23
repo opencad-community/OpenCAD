@@ -8,4 +8,6 @@ $baseDir = dirname($vendorDir);
 return array(
     'Opencad\\Core\\' => array($baseDir . '/core'),
     'Opencad\\App\\' => array($baseDir . '/app'),
+    'Core\\' => array($baseDir . '/api/core'),
+    'App\\' => array($baseDir . '/api/app'),
 );

@@ -8,7 +8,8 @@ use App\Core\TokenAuth;
 
 class AuthMiddleware
 {
-    function handle(){
+    public function handle()
+    {
         // Get the Authorization header from the request
         $header = Request::getHeader('Authorization');
 

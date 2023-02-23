@@ -142,6 +142,65 @@ INSERT INTO `ncic_attributes` VALUES (1,'Height'),(2,'Weight'),(3,'Eye Color'),(
 UNLOCK TABLES;
 
 --
+-- Table structure for table `ncic_citations`
+--
+
+DROP TABLE IF EXISTS `ncic_citations`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `ncic_citations` (
+  `citation_id` int NOT NULL AUTO_INCREMENT,
+  `citation_number` varchar(20) NOT NULL,
+  `date_of_offense` date NOT NULL,
+  `location_of_offense` varchar(100) NOT NULL,
+  `user_id` int NOT NULL,
+  `offense_code` varchar(10) DEFAULT NULL,
+  `street_id` int DEFAULT NULL,
+  PRIMARY KEY (`citation_id`),
+  KEY `fk_ncic_users` (`user_id`),
+  KEY `fk_offense_codes` (`offense_code`),
+  KEY `fk_streets` (`street_id`),
+  CONSTRAINT `fk_ncic_users` FOREIGN KEY (`user_id`) REFERENCES `ncic_users` (`id`) ON DELETE CASCADE,
+  CONSTRAINT `fk_offense_codes` FOREIGN KEY (`offense_code`) REFERENCES `ncic_offense_codes` (`offense_code`),
+  CONSTRAINT `fk_streets` FOREIGN KEY (`street_id`) REFERENCES `streets` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `ncic_citations`
+--
+
+LOCK TABLES `ncic_citations` WRITE;
+/*!40000 ALTER TABLE `ncic_citations` DISABLE KEYS */;
+INSERT INTO `ncic_citations` VALUES (1,'125762323','2023-02-22','',5,'SPD',7);
+/*!40000 ALTER TABLE `ncic_citations` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `ncic_offense_codes`
+--
+
+DROP TABLE IF EXISTS `ncic_offense_codes`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `ncic_offense_codes` (
+  `offense_code` varchar(10) NOT NULL,
+  `offense_type` varchar(50) NOT NULL,
+  PRIMARY KEY (`offense_code`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `ncic_offense_codes`
+--
+
+LOCK TABLES `ncic_offense_codes` WRITE;
+/*!40000 ALTER TABLE `ncic_offense_codes` DISABLE KEYS */;
+INSERT INTO `ncic_offense_codes` VALUES ('SPD','Speeding');
+/*!40000 ALTER TABLE `ncic_offense_codes` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `ncic_user_attributes`
 --
 
@@ -210,7 +269,7 @@ CREATE TABLE `streets` (
   `name` varchar(255) NOT NULL,
   `county` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=1956 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=1956 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -239,7 +298,7 @@ CREATE TABLE `tokens` (
   UNIQUE KEY `tokens_token_uindex` (`token`),
   KEY `fk_token_user` (`user_id`),
   CONSTRAINT `fk_token_user` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -248,6 +307,7 @@ CREATE TABLE `tokens` (
 
 LOCK TABLES `tokens` WRITE;
 /*!40000 ALTER TABLE `tokens` DISABLE KEYS */;
+INSERT INTO `tokens` VALUES (12,'_nCTCleIse4HFmd1W8oN8sXxAw2gJvUhp6cO-7V_KH09SqDJzchAhZ9iGPqShRRCa98Br7as0k8oJ14HWLa0fecTzcnynlwthc4teZeIZOwNOegGZnOdNoSZyWSCUeEnOlbruGUXop9Edu2JV92SG2fewJR5iFk8ERhESCw=',7,'2023-02-22 11:46:35'),(13,'Cdl8iXHbtLkK_YA2aJ4eP6t4iakyAPYT3JopNoH__58-AxERYb8M7-CeIRegbYJxqOHGzgVJUtFYqbOCwQ8v0Nu7N0mUSb0G0WD-xxPqmvNntXc3ZzgZAPV2I3zU3HgT4r82KJMEw0c1Kh6zusUGXTFtMlTnCi8xDZTd5zI=',7,'2023-02-22 11:48:42'),(14,'8bHe2ZioPqx12MCBiWklTf8EzJwzKEhIYZAUSfY4bmeXdk7yqOizwTMKJU2YUwKQH3Q06wcCcRPwSVqrjYpwayKBA96ocaAACPMSpqQwJBHxoW6xy6E-mePFFZFXcWwc7IXcn5R4dFmQK5ymSWkVZpvRkWmNOz0dx2xrMAw=',7,'2023-02-22 12:47:50');
 /*!40000 ALTER TABLE `tokens` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -267,7 +327,7 @@ CREATE TABLE `user_department` (
   KEY `department_id` (`department_id`),
   CONSTRAINT `user_department_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE,
   CONSTRAINT `user_department_ibfk_2` FOREIGN KEY (`department_id`) REFERENCES `departments` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -276,6 +336,7 @@ CREATE TABLE `user_department` (
 
 LOCK TABLES `user_department` WRITE;
 /*!40000 ALTER TABLE `user_department` DISABLE KEYS */;
+INSERT INTO `user_department` VALUES (32,7,4);
 /*!40000 ALTER TABLE `user_department` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -295,7 +356,7 @@ CREATE TABLE `users` (
   `created_on` datetime DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   KEY `email` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -304,7 +365,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'','johndoe@example.com','johndoe','password1','2023-02-18 17:49:48'),(3,'','bobsmith@example.com','bobsmith','password3','2023-02-18 17:49:48'),(4,'','janedoe@example.com','janedoe','password4','2023-02-18 17:53:19'),(5,'','joesmith@example.com','joesmith','password5','2023-02-18 17:53:19');
+INSERT INTO `users` VALUES (1,'','johndoe@example.com','johndoe','password1','2023-02-18 17:49:48'),(3,'','bobsmith@example.com','bobsmith','password3','2023-02-18 17:49:48'),(4,'','janedoe@example.com','janedoe','password4','2023-02-18 17:53:19'),(5,'','joesmith@example.com','joesmith','password5','2023-02-18 17:53:19'),(7,'Kevin Gorman','kgorman436@gmail.com','kevingorman1000','$2y$10$6upD3MvQ8a3u.FH/EdIDN.68Y75AqTDdmLGBI0Dto4kSorQoxtrDa','2023-02-19 19:31:40');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -317,4 +378,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-02-18 21:03:54
+-- Dump completed on 2023-02-22 14:55:22

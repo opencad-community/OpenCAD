@@ -5,16 +5,30 @@ namespace App\Controllers\Departments;
 use Core\Request;
 use Core\Response;
 use App\Models\Departments\Departments;
+use Opencad\App\Helpers\Exceptions\Generic\InternalServerErrorException;
 
+/**
+ * The DepartmentController class is responsible for handling HTTP requests related to the Departments model.
+ * It provides methods for creating, updating, deleting, and retrieving departments from the database.
+ */
 class DepartmentController
 {
     private $department;
 
+    /**
+     * Constructor for the DepartmentController class.
+     * Creates a new Departments model instance.
+     */
     public function __construct()
     {
         $this->department = new Departments();
     }
 
+    /**
+     * Retrieves all departments from the database.
+     * Sends a successful response with the department data, or a not found response if no departments are found.
+     * Sends an internal server error response if a database error occurs.
+     */
     public function index()
     {
         try {
@@ -26,12 +40,19 @@ class DepartmentController
                 $response = Response::notFound('No departments found');
                 $response->send();
             }
-        } catch (\PDOException $e) {
+        } catch (InternalServerErrorException $e) {
             $response = Response::internalServerError($e->getMessage());
             $response->send();
         }
     }
 
+    /**
+     * Retrieves a department from the database by ID.
+     * Sends a successful response with the department data, or a not found response if the department is not found.
+     * Sends an internal server error response if a database error occurs.
+     *
+     * @param int $id The ID of the department to retrieve.
+     */
     public function show($id)
     {
         try {
@@ -43,12 +64,18 @@ class DepartmentController
                 $response = Response::notFound("Department with ID {$id} not found");
                 $response->send();
             }
-        } catch (\PDOException $e) {
+        } catch (InternalServerErrorException $e) {
             $response = Response::internalServerError($e->getMessage());
             $response->send();
         }
     }
 
+    /**
+     * Creates a new department in the database.
+     * Sends a created response with a success message and the new department ID,
+     * or a bad request response if an error occurs.
+     * Sends an internal server error response if a database error occurs.
+     */
     public function create()
     {
         try {
@@ -61,12 +88,19 @@ class DepartmentController
                 $response = Response::badRequest('Error adding department');
                 $response->send();
             }
-        } catch (\PDOException $e) {
+        } catch (InternalServerErrorException $e) {
             $response = Response::internalServerError($e->getMessage());
             $response->send();
         }
     }
 
+    /**
+     * Updates a department in the database by ID.
+     * Sends a successful response with a success message, or a bad request response if an error occurs.
+     * Sends an internal server error response if a database error occurs.
+     *
+     * @param int $id The ID of the department to update.
+     */
     public function update($id)
     {
         try {
@@ -79,12 +113,19 @@ class DepartmentController
                 $response = Response::badRequest("Error updating department with ID {$id}");
                 $response->send();
             }
-        } catch (\PDOException $e) {
+        } catch (InternalServerErrorException $e) {
             $response = Response::internalServerError($e->getMessage());
             $response->send();
         }
     }
 
+    /**
+     * Deletes a department from the database by ID.
+     * Sends a successful response with a success message, or a not found response if the department is not found.
+     * Sends an internal server error response if a database error occurs.
+     *
+     * @param int $id The ID of the department to delete.
+     */
     public function delete($id)
     {
         try {
@@ -96,7 +137,7 @@ class DepartmentController
                 $response = Response::notFound("Department with ID {$id} not found");
                 $response->send();
             }
-        } catch (\PDOException $e) {
+        } catch (InternalServerErrorException $e) {
             $response = Response::internalServerError($e->getMessage());
             $response->send();
         }
