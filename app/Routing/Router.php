@@ -33,10 +33,10 @@ class Router
               $controller->execute();
               return;
             } else {
-              throw new ControllerMethodNotFoundException ("Controller method not found: execute()");
+              throw new ControllerMethodNotFoundException("Controller method not found: execute()");
             }
           } else {
-            throw new ControllerClassNotFoundException ("Controller class not found: $controllerClass");
+            throw new ControllerClassNotFoundException("Controller class not found: $controllerClass");
           }
         }
       }
