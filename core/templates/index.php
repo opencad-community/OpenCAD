@@ -2,7 +2,7 @@
 <html>
 <head>
 	<title>OpenCAD</title>
-    <link rel="icon" type="image/x-icon" href="./../images/favicon.ico">
+    <link rel="icon" type="image/x-icon" href="../../assets/images/favicon.ico">
 	<style>
 	
 		html {
@@ -88,7 +88,7 @@
 		
         <div class="image">
 
-      <img src="./images/logo.png" alt="OpenCAD"
+      <img src="../../assets/images/logo.png" alt="OpenCAD"
 	  width="320" 
      height="80" />
 
