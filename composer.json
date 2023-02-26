@@ -4,7 +4,9 @@
     "autoload": {
         "psr-4": {
             "Opencad\\Core\\": "core/",
-            "Opencad\\App\\": "app/"
+            "Opencad\\App\\": "app/",
+            "App\\": "api/app/",
+            "Core\\": "api/core/"
         }
     },
     "authors": [
@@ -12,6 +14,5 @@
             "name": "Kevin Gorman",
             "email": "kgorman436@gmail.com"
         }
-    ],
-    "require": {}
+    ]
 }

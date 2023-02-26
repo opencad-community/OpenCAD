@@ -10,11 +10,11 @@ if (session_status() === PHP_SESSION_NONE) {
 }
 
 $navItems = array(
-  new NavItem('Home', '/'),
-  new NavItem('About', '/about'),
+//   new NavItem('Home', '/'),
+//   new NavItem('About', '/about'),
 );
 
-// Loads the plugins 
+// Loads the plugins
 $pluginLoader = new PluginLoader();
 $pluginLoader->loadPlugins();
 

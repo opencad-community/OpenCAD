@@ -4,13 +4,21 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInit3337e725cbc176bf4e8772495eaf2a3d
+class ComposerStaticInit65ab1722e00828996a0442ac965045e1
 {
     public static $prefixLengthsPsr4 = array (
         'O' => 
         array (
             'Opencad\\Core\\' => 13,
             'Opencad\\App\\' => 12,
+        ),
+        'C' => 
+        array (
+            'Core\\' => 5,
+        ),
+        'A' => 
+        array (
+            'App\\' => 4,
         ),
     );
 
@@ -23,6 +31,14 @@ class ComposerStaticInit3337e725cbc176bf4e8772495eaf2a3d
         array (
             0 => __DIR__ . '/../..' . '/app',
         ),
+        'Core\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/api/core',
+        ),
+        'App\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/api/app',
+        ),
     );
 
     public static $classMap = array (
@@ -32,9 +48,9 @@ class ComposerStaticInit3337e725cbc176bf4e8772495eaf2a3d
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInit3337e725cbc176bf4e8772495eaf2a3d::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInit3337e725cbc176bf4e8772495eaf2a3d::$prefixDirsPsr4;
-            $loader->classMap = ComposerStaticInit3337e725cbc176bf4e8772495eaf2a3d::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInit65ab1722e00828996a0442ac965045e1::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInit65ab1722e00828996a0442ac965045e1::$prefixDirsPsr4;
+            $loader->classMap = ComposerStaticInit65ab1722e00828996a0442ac965045e1::$classMap;
 
         }, null, ClassLoader::class);
     }

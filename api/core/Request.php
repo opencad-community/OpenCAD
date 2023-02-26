@@ -4,7 +4,8 @@ namespace Core;
 
 /**
  * The Request class is responsible for handling and processing incoming HTTP requests.
- * It provides methods for accessing information about the request, such as the request method, URI, query parameters, and request body.
+ * It provides methods for accessing information about the request,
+ * such as the request method, URI, query parameters, and request body.
  */
 class Request
 {
@@ -39,7 +40,10 @@ class Request
     /**
      * Constructs a new Request instance.
      *
-     * Initializes the request method, request URI, query parameters, and request body properties based on information from the $_SERVER superglobal and the request body.
+     * Initializes the request method,
+     * request URI,
+     * query parameters,
+     * and request body properties based on information from the $_SERVER superglobal and the request body.
      */
     public function __construct()
     {
@@ -122,8 +126,7 @@ class Request
      */
     public static function getData()
     {
-        $data = json_decode(file_get_contents('php://input'), true);
-        return $data;
+        return json_decode(file_get_contents('php://input'), true);
     }
 
     /**

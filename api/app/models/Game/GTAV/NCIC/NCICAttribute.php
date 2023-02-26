@@ -53,9 +53,9 @@ class NCICAttribute
 
     /**
      * Retrieves the names of the attributes with the given IDs.
-     * 
+     *
      * @param array $ids An array of attribute IDs.
-     * 
+     *
      * @return array An array of attribute names.
      */
     public function getAttributeNamesByIds($ids)
@@ -80,9 +80,9 @@ class NCICAttribute
 
     /**
      * Adds a new attribute to the ncic_attributes table.
-     * 
+     *
      * @param array $data An array of attribute data, including name and type.
-     * 
+     *
      * @return int The ID of the newly inserted attribute.
      */
     public function addAttribute($data)
@@ -95,10 +95,10 @@ class NCICAttribute
 
     /**
      * Updates an existing attribute in the ncic_attributes table.
-     * 
+     *
      * @param int $id The ID of the attribute to be updated.
      * @param array $data An array of attribute data, including name and type.
-     * 
+     *
      * @return bool Returns true if the attribute was successfully updated, false otherwise.
      */
     public function updateAttribute($id, $data)

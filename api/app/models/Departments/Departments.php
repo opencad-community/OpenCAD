@@ -2,6 +2,7 @@
 namespace App\Models\Departments;
 
 use Core\Database;
+use Opencad\App\Helpers\Exceptions\DB\SqlErrorOccuredException;
 
 class Departments
 {
@@ -84,7 +85,10 @@ class Departments
     public function addDepartment($data)
     {
         try {
-            $stmt = $this->database->prepare('INSERT INTO departments (name, short_name, dept_group, active) VALUES (:name, :short_name, :dept_group, :active)');
+            $stmt = $this->database->prepare(
+                'INSERT INTO departments (name, short_name, dept_group, active)
+                VALUES (:name, :short_name, :dept_group, :active)'
+            );
             $stmt->bindParam(':name', $data['name'], \PDO::PARAM_STR);
             $stmt->bindParam(':short_name', $data['short_name'], \PDO::PARAM_STR);
             $stmt->bindParam(':dept_group', $data['dept_group'], \PDO::PARAM_STR);
@@ -108,7 +112,13 @@ class Departments
     public function updateDepartment($id, $data)
     {
         try {
-            $stmt = $this->database->prepare('UPDATE departments SET name = :name, short_name = :short_name, dept_group = :dept_group, active = :active WHERE id = :id');
+            $stmt = $this->database->prepare(
+                'UPDATE departments SET name = :name,
+                short_name = :short_name,
+                dept_group = :dept_group,
+                active = :active
+                WHERE id = :id'
+            );
             $stmt->bindParam(':id', $id, \PDO::PARAM_INT);
             $stmt->bindParam(':name', $data['name'], \PDO::PARAM_STR);
             $stmt->bindParam(':short_name', $data['short_name'], \PDO::PARAM_STR);
@@ -125,9 +135,9 @@ class Departments
 
     /**
      * Delete a department from the departments table.
-     * 
+     *
      * @param int $id The ID of the department to be deleted.
-     * 
+     *
      * @return bool Returns true if the department was successfully deleted, false otherwise.
      */
     public function deleteDepartment($id)
@@ -136,7 +146,7 @@ class Departments
             $stmt = $this->database->prepare('DELETE FROM departments WHERE id = :id');
             $stmt->bindParam(':id', $id, \PDO::PARAM_INT);
             return $this->database->executeStatement($stmt);
-        } catch (\PDOException $e) {
+        } catch (SqlErrorOccuredException $e) {
             // Log the error message to the console
             error_log($e->getMessage());
             return false;

@@ -4,6 +4,8 @@ namespace App\Models\User;
 
 use Core\Database;
 
+define("EMAIL", ":email");
+
 /**
  * User model class that retrieves data from the users table.
  */
@@ -52,9 +54,9 @@ class User
     }
     /**
      * Adds a new user to the users table.
-     * 
+     *
      * @param array $data An array of user data, including name, email, and password.
-     * 
+     *
      * @return int The ID of the newly inserted user.
      */
     public function addUser($data)
@@ -62,7 +64,7 @@ class User
         $password = password_hash($data["password"], PASSWORD_DEFAULT);
         $stmt = $this->database->prepare('INSERT INTO users (name, email, password) VALUES (:name, :email, :password)');
         $stmt->bindParam(':name', $data['name'], \PDO::PARAM_STR);
-        $stmt->bindParam(':email', $data['email'], \PDO::PARAM_STR);
+        $stmt->bindParam(EMAIL, $data['email'], \PDO::PARAM_STR);
         $stmt->bindParam(':password', $password, \PDO::PARAM_STR);
         $this->database->executeStatement($stmt);
         return (int) $this->database->lastInsertId();
@@ -70,27 +72,32 @@ class User
 
     /**
      * Updates an existing user in the users table.
-     * 
+     *
      * @param int $id The ID of the user to be updated.
      * @param array $data An array of user data, including name, email, and password.
-     * 
+     *
      * @return bool Returns true if the user was successfully updated, false otherwise.
      */
     public function updateUser($id, $data)
     {
-        $stmt = $this->database->prepare('UPDATE users SET name = :name, email = :email, password = :password WHERE id = :id');
+        $stmt = $this->database->prepare(
+            'UPDATE users
+            SET name = :name,
+            email = :email,
+            password = :password WHERE id = :id'
+        );
         $stmt->bindParam(':id', $id, \PDO::PARAM_INT);
         $stmt->bindParam(':name', $data['name'], \PDO::PARAM_STR);
-        $stmt->bindParam(':email', $data['email'], \PDO::PARAM_STR);
+        $stmt->bindParam(EMAIL, $data['email'], \PDO::PARAM_STR);
         $stmt->bindParam(':password', $data['password'], \PDO::PARAM_STR);
         return $this->database->executeStatement($stmt);
     }
 
     /**
      * Deletes a user from the users table.
-     * 
+     *
      * @param int $id The ID of the user to be deleted.
-     * 
+     *
      * @return bool Returns true if the user was successfully deleted, false otherwise.
      */
     public function deleteUser($id)
@@ -98,6 +105,20 @@ class User
         $stmt = $this->database->prepare('DELETE FROM users WHERE id = :id');
         $stmt->bindParam(':id', $id, \PDO::PARAM_INT);
         return $this->database->executeStatement($stmt);
+    }
+
+    /**
+     * Verifies if a user with the specified email exists in the database
+     *
+     * @param string $email The email of the user to verify
+     * @return array|null An array representing the user, or null if the user does not exist
+     */
+    public function verifyUser($email)
+    {
+        $stmt = $this->database->prepare('SELECT * FROM users WHERE email = :email');
+        $stmt->bindParam(EMAIL, $email, \PDO::PARAM_STR);
+        $this->database->executeStatement($stmt);
+        return $this->database->resultSet($stmt);
     }
 
 }

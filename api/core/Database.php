@@ -5,6 +5,11 @@ namespace Core;
 use PDO;
 use Exception;
 use PDOStatement;
+use Opencad\App\Helpers\Exceptions\DB\ExecutionFailedException;
+use Opencad\App\Helpers\Exceptions\DB\FetchingResultFailedException;
+use Opencad\App\Helpers\Exceptions\DB\InvalidDatabaseLoginException;
+use Opencad\App\Helpers\Exceptions\DB\PrepareStatementErrorException;
+use Opencad\App\Helpers\Exceptions\DB\InvalidDatabaseConfigurationException;
 
 class Database
 {
@@ -59,16 +64,29 @@ class Database
      */
     public static function getInstance()
     {
-        $config = require_once __DIR__ . '/../config/database.php';
+        try {
+            $config = require __DIR__ . "/../config/database.php";
 
-        $dsn = "mysql:host={$config['host']};dbname={$config['dbname']}";
-        $username = $config['username'];
-        $password = $config['password'];
+            $host = $config['host'] ?? null;
+            $dbname = $config['dbname'] ?? null;
 
-        if (!self::$instance) {
-            self::$instance = new self($dsn, $username, $password);
+            if ($host === null || $dbname === null) {
+                throw new InvalidDatabaseConfigurationException('Invalid database configuration');
+            }
+
+            $dsn = "mysql:host={$host};dbname={$dbname}";
+            $username = $config['username'] ?? '';
+            $password = $config['password'] ?? '';
+
+            if (!self::$instance) {
+                self::$instance = new self($dsn, $username, $password);
+            }
+            return self::$instance;
+        } catch (\PDOException $e) {
+            // Log the error message to the console
+            error_log($e->getMessage());
+            throw new InvalidDatabaseLoginException('Database connection error');
         }
-        return self::$instance;
     }
 
     /**
@@ -76,13 +94,13 @@ class Database
      *
      * @param string $sql The SQL statement to prepare.
      * @return PDOStatement
-     * @throws \PDOException
+     * @throws PrepareStatementErrorException
      */
     public function prepare(string $sql)
     {
         try {
             return $this->pdo->prepare($sql);
-        } catch (\PDOException $e) {
+        } catch (PrepareStatementErrorException $e) {
             // Log the error or perform other error handling as needed
             error_log($e->getMessage());
             throw $e;
@@ -100,10 +118,10 @@ class Database
         try {
             $result = $stmt->execute();
             if ($result === false) {
-                throw new Exception('Query execution failed');
+                throw new ExecutionFailedException('Query execution failed');
             }
             return $result;
-        } catch (Exception $e) {
+        } catch (ExecutionFailedException $e) {
             // Log the error or perform other error handling as needed
             error_log($e->getMessage());
             return false;
@@ -121,10 +139,10 @@ class Database
         try {
             $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
             if ($results === false) {
-                throw new Exception('Fetching results failed');
+                throw new FetchingResultFailedException('Fetching results failed');
             }
             return $results;
-        } catch (Exception $e) {
+        } catch (FetchingResultFailedException $e) {
             // Log the error or perform other error handling as needed
             error_log($e->getMessage());
             return false;
