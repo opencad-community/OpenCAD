@@ -2,7 +2,7 @@
 <html>
 <head>
 	<title>OpenCAD</title>
-    <link rel="icon" type="image/x-icon" href="./../images/favicon.ico">
+    <link rel="icon" type="image/x-icon" href="../../assets/images/favicon.ico">
 	<style>
 	
 		html {
@@ -56,7 +56,8 @@
   			border: none;
 			color: white;
 			padding: 16px 84px;
-			text-align: center;
+  			display: flex;
+  			justify-content: center;
 			text-decoration: none;
 			display: inline-block;
 			font-size: 16px;
@@ -87,7 +88,7 @@
 		
         <div class="image">
 
-      <img src="./images/logo.png" alt="OpenCAD"
+      <img src="../../assets/images/logo.png" alt="OpenCAD"
 	  width="320" 
      height="80" />
 
@@ -97,12 +98,13 @@
     <p> "< COMMUNTY_NAME >" </p>
 </div>
 <div>
-<a class="button button1" href="./actionpage/login.php" <style="margin-bottom:20px;">Login</a> 
-</div>
+	
+<a class="button button1" style="text-align:center" href="./actionpage/login.php" <style="margin-bottom:20px;">Login</a> 
+			</div>
 
-<div>
-<a class="button button1" href="./actionpage/registration.php" >Register</a>
-</div>
+<div><center>
+<a class="button button1" style="text-align:center" href="./actionpage/registration.php" >Register</a>
+		</center></div>
 	</form>
 	
 </body>

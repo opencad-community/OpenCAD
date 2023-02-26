@@ -1,7 +1,5 @@
 <!DOCTYPE html>
-
-
-<link rel="icon" type="image/x-icon" href="./../images/favicon.ico">
+<link rel="icon" type="image/x-icon" href="../../../assets/images/favicon.ico">
 <html>
 <head>
 	<title>OpenCAD</title>
@@ -43,20 +41,45 @@
 			padding: 10px;
 			width: 100%;
 		}
-		.center {
+        .center {
             text-align: center;
             font-size:16px;
 			font-weight: bold;
 			color: #c7c7c7;
         }
+
+		.button1 {
+			background-color: #4CAF50; 
+			color: black; 
+			border: 2px solid #4CAF50;
+	 	}	
+		.button1:hover {
+			background-color: #4CAF50;
+			color: white;
+		}
+		.button {
+  			background-color: #4CAF50; /* Green */
+  			border: none;
+			color: white;
+			padding: 16px 84px;
+  			display: flex;
+  			justify-content: center;
+			text-decoration: none;
+			display: inline-block;
+			font-size: 16px;
+			margin: auto;
+			transition-duration: 0.4s;
+			cursor: pointer;
+			border-radius: 8px;
+		}
 	</style>
 </head>
 <body>
-	<form action="login.php" method="POST">
+	<form action="registration.php" method="POST">
 		
         <div class="image">
 
-      <img src="./../images/logo.png" alt="OpenCAD"
+      <img src="../../../assets/images/logo.png" alt="OpenCAD"
 	  width="320" 
      height="80" />
 
@@ -69,7 +92,7 @@
 		<input type="text" id="username" name="username" placeholder="Enter your username">
 		<label for="password">Password:</label>
 		<input type="password" id="password" name="password" placeholder="Enter your password">
-		<input type="submit" value="Login">
+		<input class="button button1" type="submit" value="Register">
 	</form>
 </body>
 </html>

@@ -2,7 +2,7 @@
 <html>
 <head>
 	<title>OpenCAD</title>
-    <link rel="icon" type="image/x-icon" href="./../images/favicon.ico">
+    <link rel="icon" type="image/x-icon" href="../../assets/images/favicon.ico">
 	<style>
 	
 		html {
@@ -66,20 +66,31 @@
 			border-radius: 8px;
 		}
 
+
 		.button1 {
 			background-color: #333; 
 			color: white; 
 			border: 2px solid #4CAF50;
-	 	}	
+		}
 		.button1:hover {
 			background-color: #4CAF50;
-			color: black;
-}
-		div {
-			padding-top: 10px;
-
-			}	
-
+			color: white;
+		}
+		.button {
+  			background-color: #4CAF50; /* Green */
+  			border: none;
+			color: white;
+			padding: 16px 84px;
+  			display: flex;
+  			justify-content: center;
+			text-decoration: none;
+			display: inline-block;
+			font-size: 16px;
+			margin: auto;
+			transition-duration: 0.4s;
+			cursor: pointer;
+			border-radius: 8px;
+		}
 	</style>
 </head>
 <body>
@@ -87,7 +98,7 @@
 		
         <div class="image">
 
-      <img src="./images/logo.png" alt="OpenCAD"
+      <img src="./../images/logo.png" alt="OpenCAD"
 	  width="320" 
      height="80" />
 
@@ -97,11 +108,11 @@
     <p> "< COMMUNTY_NAME >" </p>
 </div>
 <div>
-<a class="button button1" href="./actionpage/login.php" <style="margin-bottom:20px;">Login</a> 
+<a class="button button1" href="./login.php" <style="margin-bottom:20px;">Login</a> 
 </div>
 
 <div>
-<a class="button button1" href="./actionpage/registration.php" >Register</a>
+<a class="button button1" href="./registration.php" >Register</a>
 </div>
 	</form>
 	
