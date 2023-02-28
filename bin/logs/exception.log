@@ -22,3 +22,11 @@ Stack trace: #0 C:\wamp64\www\app\Helpers\LangHelper\LangHandler.php(108): Openc
 File: C:\wamp64\www\app\Helpers\LangHelper\LangHandler.php
 Line: 29
 Logged Date Time: 2023-02-28 12:21:01
+Exception: The language tr is not supported yet! Please open a request on the GitHub
+Stack trace: #0 C:\wamp64\www\app\Helpers\LangHelper\LangHandler.php(107): Opencad\App\Helpers\LangHelper\LangHandler->__construct('tr')
+#1 C:\wamp64\www\app\bootstrap.php(28): Opencad\App\Helpers\LangHelper\LangHandler::getDefault()
+#2 C:\wamp64\www\public\index.php(5): require_once('C:\\wamp64\\www\\a...')
+#3 {main}
+File: C:\wamp64\www\app\Helpers\LangHelper\LangHandler.php
+Line: 29
+Logged Date Time: 2023-02-28 12:40:07

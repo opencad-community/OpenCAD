@@ -30,9 +30,6 @@ class LangHandler
         "The language $languageCode is not supported yet! Please open a request on the GitHub"
       );
     }
-
-    $this->languageFile = __DIR__ . "/../../../core/locale/$languageCode.php";
-    $this->load();
   }
 
   /**
@@ -43,7 +40,7 @@ class LangHandler
   public function load()
   {
     try {
-      $this->language = include $this->languageFile;
+      $this->language = include_once $this->languageFile;
     } catch (LanguageFileNotFoundException $e) {
       error_log("Error loading language file: " . $e->getMessage());
       $this->language = array();
@@ -83,7 +80,7 @@ class LangHandler
 
     // If the language file exists, get the translation string for the given key and language code
     if (file_exists($languageFile)) {
-      $language = include __DIR__ . "/../../../core/locale/$languageCode.php";
+      $language = include_once $languageFile;
       if (isset($language[$key])) {
         return $language[$key];
       }
@@ -97,11 +94,13 @@ class LangHandler
     error_log("Translation not found: $key ($languageCode)");
 
     return $key;
-  } /**
-    * Gets the default language file instance
-    *
-    * @return LangHandler The default language file instance
-    */
+  }
+
+  /**
+   * Gets the default language file instance
+   *
+   * @return LangHandler The default language file instance
+   */
   public static function getDefault()
   {
     if (!isset(self::$defaultInstance)) {
@@ -152,21 +151,21 @@ class LangHandler
    * @param string $languageCode The language code to use for the translations
    */
   public static function addPluginTranslations($pluginName, $languageCode = 'en')
-{
+  {
     if (!isset(self::$languages[$languageCode])) {
-        self::$languages[$languageCode] = array();
+      self::$languages[$languageCode] = array();
     }
 
     // Check if the plugin has a language file for the specified language code
     $pluginLocaleFile = __DIR__ . "/../../../plugins/$pluginName/locale/$languageCode.php";
     if (file_exists($pluginLocaleFile)) {
-        $plugin_locale = include $pluginLocaleFile;
+      $plugin_locale = include_once $pluginLocaleFile;
     } else {
-        // If the plugin doesn't have a language file for the specified language code, use the default language file
-        $pluginLocaleFile = __DIR__ . "/../../../plugins/$pluginName/locale/en.php";
-        $plugin_locale = include $pluginLocaleFile;
+      // If the plugin doesn't have a language file for the specified language code, use the default language file
+      $pluginLocaleFile = __DIR__ . "/../../../plugins/$pluginName/locale/en.php";
+      $plugin_locale = include_once $pluginLocaleFile;
     }
 
     self::$languages[$languageCode] = array_merge(self::$languages[$languageCode], $plugin_locale);
-}
+  }
 }
