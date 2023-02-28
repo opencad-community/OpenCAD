@@ -2,11 +2,13 @@
 
 namespace Opencad\App\Helpers\Config;
 
-class ConfigHandler {
+class ConfigHandler
+{
     private $configs = array();
     private $cache = array();
 
-    public function __construct() {
+    public function __construct()
+    {
         $configFiles = glob(__DIR__ . '/../../../config/*.json');
 
         foreach ($configFiles as $configFile) {
@@ -17,7 +19,8 @@ class ConfigHandler {
         }
     }
 
-    public function get($configName, $key) {
+    public function get($configName, $key)
+    {
         if (!isset($this->cache[$configName])) {
             $this->cache[$configName] = array();
         }
@@ -41,7 +44,8 @@ class ConfigHandler {
         return $this->cache[$configName][$key];
     }
 
-    public function getArray($configName, $key) {
+    public function getArray($configName, $key)
+    {
         $value = $this->get($configName, $key);
 
         if (is_array($value)) {

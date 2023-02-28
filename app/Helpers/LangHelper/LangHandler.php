@@ -166,13 +166,13 @@ class LangHandler
     // Check if the plugin has a language file for the specified language code
     $pluginLocaleFile = __DIR__ . "/../../../plugins/$pluginName/locale/$languageCode.php";
     if (file_exists($pluginLocaleFile)) {
-      $plugin_locale = include_once $pluginLocaleFile;
+      $pluginLocale = include_once $pluginLocaleFile;
     } else {
       // If the plugin doesn't have a language file for the specified language code, use the default language file
       $pluginLocaleFile = __DIR__ . "/../../../plugins/$pluginName/locale/en.php";
-      $plugin_locale = include_once $pluginLocaleFile;
+      $pluginLocale = include_once $pluginLocaleFile;
     }
 
-    self::$languages[$languageCode] = array_merge(self::$languages[$languageCode], $plugin_locale);
+    self::$languages[$languageCode] = array_merge(self::$languages[$languageCode], $pluginLocale);
   }
 }

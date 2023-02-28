@@ -1,18 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 	<title>OpenCAD</title>
-    <link rel="icon" type="image/x-icon" href="assets/wimages/favicon.ico">
+	<link rel="icon" type="image/x-icon" href="assets/wimages/favicon.ico">
 	<style>
-	
 		html {
-  				height: 100%;
+			height: 100%;
 		}
+
 		body {
 			background: linear-gradient(to bottom, #14051d, #333);
 			font-family: Arial, sans-serif;
 		}
-		
+
 		form {
 			background-color: #333;
 			border-radius: 10px;
@@ -20,8 +21,9 @@
 			margin: 50px auto;
 			width: 300px;
 		}
-		
-		input[type="text"], input[type="password"] {
+
+		input[type="text"],
+		input[type="password"] {
 			background-color: #ddd;
 			border: none;
 			border-radius: 5px;
@@ -30,9 +32,9 @@
 			margin-bottom: 10px;
 			padding: 10px;
 			width: 100%;
-            text-align: center;
+			text-align: center;
 		}
-		
+
 		input[type="submit"] {
 			background-color: #4CAF50;
 			border: none;
@@ -44,16 +46,17 @@
 			width: 100%;
 		}
 
-        .center {
-            text-align: center;
-            font-size:16px;
+		.center {
+			text-align: center;
+			font-size: 16px;
 			font-weight: bold;
 			color: #c7c7c7;
-        }
-		
+		}
+
 		.button {
-  			background-color: #4CAF50; /* Green */
-  			border: none;
+			background-color: #4CAF50;
+			/* Green */
+			border: none;
 			color: white;
 			padding: 16px 84px;
 			text-align: center;
@@ -67,43 +70,45 @@
 		}
 
 		.button1 {
-			background-color: #333; 
-			color: white; 
+			background-color: #333;
+			color: white;
 			border: 2px solid #4CAF50;
-	 	}	
+		}
+
 		.button1:hover {
 			background-color: #4CAF50;
 			color: black;
-}
+		}
+
 		div {
 			padding-top: 10px;
 
-			}	
+		}
 
 	</style>
 </head>
+
 <body>
 	<form>
-		
-        <div class="image">
 
-      <img src="./images/logo.png" alt="OpenCAD"
-	  width="320" 
-     height="80" />
+		<div class="image">
+
+			<img src="./images/logo.png" alt="OpenCAD" width="320" height="80" />
 
 
-</div>
-<div class="center">
-    <p> "< COMMUNTY_NAME >" </p>
-</div>
-<div>
-<a class="button button1" href="./actionpage/login.php" <style="margin-bottom:20px;">Login</a> 
-</div>
+		</div>
+		<div class="center">
+			<p> "< COMMUNTY_NAME>" </p>
+		</div>
+		<div>
+			<a class="button button1" href="./actionpage/login.php" <style="margin-bottom:20px;">Login</a>
+		</div>
 
-<div>
-<a class="button button1" href="./actionpage/registration.php" >Register</a>
-</div>
+		<div>
+			<a class="button button1" href="./actionpage/registration.php">Register</a>
+		</div>
 	</form>
-	
+
 </body>
+
 </html>
