@@ -1,9 +1,0 @@
-Exception: Database connection error
-Stack trace: #0 C:\wamp64\www\api\app\Models\User\User.php(26): Core\Database::getInstance()
-#1 C:\wamp64\www\api\app\Controllers\User\UserController.php(33): App\Models\User\User->__construct()
-#2 C:\wamp64\www\api\core\Router.php(149): App\Controllers\User\UserController->__construct()
-#3 C:\wamp64\www\api\public\index.php(381): Core\Router->dispatch('/api/user')
-#4 {main}
-File: C:\wamp64\www\api\core\Database.php
-Line: 88
-Logged Date Time: 2023-02-22 20:49:39
