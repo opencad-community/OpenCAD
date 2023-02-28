@@ -83,7 +83,7 @@ class LangHandler
 
     // If the language file exists, get the translation string for the given key and language code
     if (file_exists($languageFile)) {
-      $language = include $languageFile;
+      $language = include __DIR__ . "/../../../core/locale/$languageCode.php";
       if (isset($language[$key])) {
         return $language[$key];
       }
