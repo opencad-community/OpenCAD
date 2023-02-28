@@ -148,20 +148,25 @@ class LangHandler
   /**
    * Adds a plugin's translations to the static $languages array
    *
-   * @param string $plugin_name The name of the plugin
+   * @param string $pluginName The name of the plugin
    * @param string $languageCode The language code to use for the translations
    */
-  public static function addPluginTranslations($plugin_name, $languageCode = 'en')
-  {
+  public static function addPluginTranslations($pluginName, $languageCode = 'en')
+{
     if (!isset(self::$languages[$languageCode])) {
-      self::$languages[$languageCode] = array();
+        self::$languages[$languageCode] = array();
     }
 
-    $plugin_locale_file = __DIR__ . "/../../../plugins/$plugin_name/locale/$languageCode.php";
-
-    if (file_exists($plugin_locale_file)) {
-      $plugin_locale = include $plugin_locale_file;
-      self::$languages[$languageCode] = array_merge(self::$languages[$languageCode], $plugin_locale);
+    // Check if the plugin has a language file for the specified language code
+    $pluginLocaleFile = __DIR__ . "/../../../plugins/$pluginName/locale/$languageCode.php";
+    if (file_exists($pluginLocaleFile)) {
+        $plugin_locale = include $pluginLocaleFile;
+    } else {
+        // If the plugin doesn't have a language file for the specified language code, use the default language file
+        $pluginLocaleFile = __DIR__ . "/../../../plugins/$pluginName/locale/en.php";
+        $plugin_locale = include $pluginLocaleFile;
     }
-  }
+
+    self::$languages[$languageCode] = array_merge(self::$languages[$languageCode], $plugin_locale);
+}
 }

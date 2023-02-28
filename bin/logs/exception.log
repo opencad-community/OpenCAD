@@ -1,0 +1,24 @@
+Exception: The language en-GB is not supported yet! Please open a request on the GitHub
+Stack trace: #0 C:\wamp64\www\app\Helpers\LangHelper\LangHandler.php(108): Opencad\App\Helpers\LangHelper\LangHandler->__construct('en-GB')
+#1 C:\wamp64\www\app\bootstrap.php(28): Opencad\App\Helpers\LangHelper\LangHandler::getDefault()
+#2 C:\wamp64\www\public\index.php(5): require_once('C:\\wamp64\\www\\a...')
+#3 {main}
+File: C:\wamp64\www\app\Helpers\LangHelper\LangHandler.php
+Line: 29
+Logged Date Time: 2023-02-28 12:12:55
+Exception: The language en-GB is not supported yet! Please open a request on the GitHub
+Stack trace: #0 C:\wamp64\www\app\Helpers\LangHelper\LangHandler.php(109): Opencad\App\Helpers\LangHelper\LangHandler->__construct('en-GB')
+#1 C:\wamp64\www\app\bootstrap.php(28): Opencad\App\Helpers\LangHelper\LangHandler::getDefault()
+#2 C:\wamp64\www\public\index.php(5): require_once('C:\\wamp64\\www\\a...')
+#3 {main}
+File: C:\wamp64\www\app\Helpers\LangHelper\LangHandler.php
+Line: 30
+Logged Date Time: 2023-02-28 12:20:38
+Exception: The language en is not supported yet! Please open a request on the GitHub
+Stack trace: #0 C:\wamp64\www\app\Helpers\LangHelper\LangHandler.php(108): Opencad\App\Helpers\LangHelper\LangHandler->__construct('en')
+#1 C:\wamp64\www\app\bootstrap.php(28): Opencad\App\Helpers\LangHelper\LangHandler::getDefault()
+#2 C:\wamp64\www\public\index.php(5): require_once('C:\\wamp64\\www\\a...')
+#3 {main}
+File: C:\wamp64\www\app\Helpers\LangHelper\LangHandler.php
+Line: 29
+Logged Date Time: 2023-02-28 12:21:01

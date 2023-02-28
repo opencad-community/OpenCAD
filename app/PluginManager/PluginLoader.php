@@ -52,7 +52,7 @@ class PluginLoader
       $plugin = new $className();
 
       // Add plugin translations to the language handler
-      LangHandler::addPluginTranslations($className);
+      LangHandler::addPluginTranslations($className, DEFAULT_LANGUAGE);
 
       // Check if the plugin implements the PluginInterface, if so add it to the plugins array
       if ($plugin instanceof PluginInterface) {
