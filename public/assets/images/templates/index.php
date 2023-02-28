@@ -1,11 +1,10 @@
 <!DOCTYPE html>
-
-
-<link rel="icon" type="image/x-icon" href="./../images/favicon.ico">
-<html>
+<html lang="en">
 <head>
 	<title>OpenCAD</title>
+    <link rel="icon" type="image/x-icon" href="./../images/favicon.ico">
 	<style>
+	
 		html {
   				height: 100%;
 		}
@@ -31,45 +30,80 @@
 			margin-bottom: 10px;
 			padding: 10px;
 			width: 100%;
+            text-align: center;
 		}
 		
 		input[type="submit"] {
 			background-color: #4CAF50;
 			border: none;
 			border-radius: 5px;
-			color: #fff;
+			color: #000;
 			cursor: pointer;
 			font-size: 16px;
 			padding: 10px;
 			width: 100%;
 		}
-		.center {
+
+        .center {
             text-align: center;
             font-size:16px;
 			font-weight: bold;
 			color: #c7c7c7;
         }
+		
+		.button {
+  			background-color: #4CAF50; /* Green */
+  			border: none;
+			color: white;
+			padding: 16px 84px;
+			text-align: center;
+			text-decoration: none;
+			display: inline-block;
+			font-size: 16px;
+			margin: auto;
+			transition-duration: 0.4s;
+			cursor: pointer;
+			border-radius: 8px;
+		}
+
+		.button1 {
+			background-color: #333; 
+			color: white; 
+			border: 2px solid #4CAF50;
+	 	}	
+		.button1:hover {
+			background-color: #4CAF50;
+			color: black;
+}
+		div {
+			padding-top: 10px;
+
+			}	
+
 	</style>
 </head>
 <body>
-	<form action="login.php" method="POST">
+	<form>
 		
         <div class="image">
 
-      <img src="./../images/logo.png" alt="OpenCAD"
+      <img src="./images/logo.png" alt="OpenCAD"
 	  width="320" 
      height="80" />
+
 
 </div>
 <div class="center">
     <p> "< COMMUNTY_NAME >" </p>
 </div>
+<div>
+<a class="button button1" href="./actionpage/login.php" <style="margin-bottom:20px;">Login</a> 
+</div>
 
-		<label for="username">Username:</label>
-		<input type="text" id="username" name="username" placeholder="Enter your username">
-		<label for="password">Password:</label>
-		<input type="password" id="password" name="password" placeholder="Enter your password">
-		<input type="submit" value="Login">
+<div>
+<a class="button button1" href="./actionpage/registration.php" >Register</a>
+</div>
 	</form>
+	
 </body>
 </html>

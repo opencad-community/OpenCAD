@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<htmllang="en">
 <head>
 	<title>OpenCAD</title>
     <link rel="icon" type="image/x-icon" href="./../images/favicon.ico">
@@ -67,13 +67,13 @@
 		}
 
 		.button1 {
-			background-color: #333; 
-			color: white; 
+			background-color: #4CAF50; 
+			color: black; 
 			border: 2px solid #4CAF50;
 	 	}	
 		.button1:hover {
 			background-color: #4CAF50;
-			color: black;
+			color: white;
 }
 		div {
 			padding-top: 10px;
@@ -87,7 +87,7 @@
 		
         <div class="image">
 
-      <img src="./images/logo.png" alt="OpenCAD"
+      <img src="./../images/logo.png" alt="OpenCAD"
 	  width="320" 
      height="80" />
 
@@ -97,11 +97,11 @@
     <p> "< COMMUNTY_NAME >" </p>
 </div>
 <div>
-<a class="button button1" href="./actionpage/login.php" <style="margin-bottom:20px;">Login</a> 
+<a class="button button1" href="./login.php" <style="margin-bottom:20px;">Login</a> 
 </div>
 
 <div>
-<a class="button button1" href="./actionpage/registration.php" >Register</a>
+<a class="button button1" href="./registration.php" >Register</a>
 </div>
 	</form>
 	

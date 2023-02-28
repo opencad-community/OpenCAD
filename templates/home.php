@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 	<title>OpenCAD</title>
-    <link rel="icon" type="image/x-icon" href="./../images/favicon.ico">
+    <link rel="icon" type="image/x-icon" href="assets/images/favicon.ico">
 	<style>
 	
 		html {

@@ -2,7 +2,7 @@
 
 
 <link rel="icon" type="image/x-icon" href="./../images/favicon.ico">
-<html>
+<html lang="en">
 <head>
 	<title>OpenCAD</title>
 	<style>
