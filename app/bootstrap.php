@@ -1,10 +1,10 @@
 <?php
 
 use Opencad\App\PluginManager\PluginLoader;
+use Opencad\App\Helpers\Config\ConfigHandler;
 use Opencad\App\Helpers\LangHelper\LangHandler;
 
 require_once __DIR__ . '/../vendor/autoload.php';
-require_once __DIR__ . "/../config/config.php";
 
 if (session_status() === PHP_SESSION_NONE) {
   session_start();
@@ -23,6 +23,9 @@ $plugins = $pluginLoader->getPlugins();
 foreach ($plugins as $plugin) {
   $plugin->execute();
 }
+
+
+$config = new ConfigHandler();
 
 // retrieve the default LanguageFile instance
 $lang = LangHandler::getDefault();

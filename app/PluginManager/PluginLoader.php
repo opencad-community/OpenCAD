@@ -2,6 +2,7 @@
 
 namespace Opencad\App\PluginManager;
 
+use Opencad\App\Helpers\Config\ConfigHandler;
 use Opencad\App\PluginManager\PluginInterface;
 use Opencad\App\Helpers\LangHelper\LangHandler;
 
@@ -51,8 +52,12 @@ class PluginLoader
       // Instantiate the plugin class
       $plugin = new $className();
 
-      // Add plugin translations to the language handler
-      LangHandler::addPluginTranslations($className, DEFAULT_LANGUAGE);
+      // Create a ConfigHandler instance and get the language.default value from the config.json file
+      $config = new ConfigHandler();
+      $languageCode = $config->get('config', 'language.default');
+
+      // Add plugin translations to the language handler using the $languageCode value
+      LangHandler::addPluginTranslations($className, $languageCode);
 
       // Check if the plugin implements the PluginInterface, if so add it to the plugins array
       if ($plugin instanceof PluginInterface) {
@@ -60,6 +65,7 @@ class PluginLoader
       }
     }
   }
+
 
   // Returns an array of all loaded plugins
   public function getPlugins()

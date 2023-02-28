@@ -5,6 +5,7 @@ namespace Core;
 use PDO;
 use Exception;
 use PDOStatement;
+use Opencad\App\Helpers\Config\ConfigHandler;
 use Opencad\App\Helpers\Exceptions\DB\ExecutionFailedException;
 use Opencad\App\Helpers\Exceptions\DB\FetchingResultFailedException;
 use Opencad\App\Helpers\Exceptions\DB\InvalidDatabaseLoginException;
@@ -65,22 +66,23 @@ class Database
     public static function getInstance()
     {
         try {
-            $config = require __DIR__ . "/../config/database.php";
+            $config = new ConfigHandler();
 
-            $host = $config['host'] ?? null;
-            $dbname = $config['dbname'] ?? null;
+            $host = $config->get('database', 'host');
+            $dbname = $config->get('database', 'dbname');
 
             if ($host === null || $dbname === null) {
                 throw new InvalidDatabaseConfigurationException('Invalid database configuration');
             }
 
             $dsn = "mysql:host={$host};dbname={$dbname}";
-            $username = $config['username'] ?? '';
-            $password = $config['password'] ?? '';
+            $username = $config->get('database', 'username') ?? '';
+            $password = $config->get('database', 'password') ?? '';
 
             if (!self::$instance) {
                 self::$instance = new self($dsn, $username, $password);
             }
+
             return self::$instance;
         } catch (\PDOException $e) {
             // Log the error message to the console
@@ -88,6 +90,7 @@ class Database
             throw new InvalidDatabaseLoginException('Database connection error');
         }
     }
+
 
     /**
      * Prepares a SQL statement for execution.

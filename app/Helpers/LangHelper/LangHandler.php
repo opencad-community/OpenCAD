@@ -2,6 +2,7 @@
 
 namespace Opencad\App\Helpers\LangHelper;
 
+use Opencad\App\Helpers\Config\ConfigHandler;
 use Opencad\App\Helpers\Exceptions\Language\LanguageFileNotFoundException;
 use Opencad\App\Helpers\Exceptions\Language\LanguageNotSupportedException;
 
@@ -65,14 +66,16 @@ class LangHandler
    */
   public static function get($key, $languageCode = null)
   {
+    $config = new ConfigHandler();
+
     // If no language code is specified, check the user's preferred language
     if (!$languageCode) {
       $languageCode = htmlspecialchars(isset($_COOKIE['user_language']) ? $_COOKIE['user_language'] : null);
     }
 
-    // If no language code is specified or found, default to English
+    // If no language code is specified or found, default to the language.default value in the config file
     if (!$languageCode) {
-      $languageCode = DEFAULT_LANGUAGE;
+      $languageCode = $config->get('config', 'language.default');
     }
 
     $languageCode = htmlspecialchars($languageCode);
@@ -96,6 +99,7 @@ class LangHandler
     return $key;
   }
 
+
   /**
    * Gets the default language file instance
    *
@@ -103,12 +107,15 @@ class LangHandler
    */
   public static function getDefault()
   {
+    $config = new ConfigHandler();
+
     if (!isset(self::$defaultInstance)) {
-      self::$defaultInstance = new LangHandler(DEFAULT_LANGUAGE);
+      self::$defaultInstance = new LangHandler($config->get('config', 'language.default'));
     }
 
     return self::$defaultInstance;
   }
+
 
   /**
    * Loads a language file from a specified language code
@@ -125,7 +132,7 @@ class LangHandler
       throw new LanguageFileNotFoundException("Language file not found: $languageFile");
     }
 
-    return include $languageFile;
+    return include_once $languageFile;
   }
 
   /**

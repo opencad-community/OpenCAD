@@ -17,7 +17,7 @@ $router->add('/generate-token', ['controller' => 'Api\AuthController', 'action' 
 $router->add(
     '/',
     ['controller' => 'HomeController', 'action' => 'index'],
-    ["AuthMiddleware"]
+    []
 );
 
 // Group of routes for the user

@@ -55,12 +55,6 @@ class AuthController
                 $auth = new TokenAuth();
                 $token = $auth->generateToken($results[0]["id"]);
 
-                // Save the token to the database for the user
-                $stmt = $db->prepare("UPDATE users SET token = :token WHERE email = :email");
-                $stmt->bindParam(':token', $token);
-                $stmt->bindParam(':email', $email);
-                $db->executeStatement($stmt);
-
                 // Return the token in the response
                 $response = Response::success(['token' => $token]);
                 $response->send();

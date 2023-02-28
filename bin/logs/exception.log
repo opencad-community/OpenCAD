@@ -30,3 +30,12 @@ Stack trace: #0 C:\wamp64\www\app\Helpers\LangHelper\LangHandler.php(107): Openc
 File: C:\wamp64\www\app\Helpers\LangHelper\LangHandler.php
 Line: 29
 Logged Date Time: 2023-02-28 12:40:07
+Exception: Invalid database configuration
+Stack trace: #0 C:\wamp64\www\api\app\Controllers\Api\AuthController.php(37): Core\Database::getInstance()
+#1 [internal function]: App\Controllers\Api\AuthController->generateToken()
+#2 C:\wamp64\www\api\core\Router.php(152): call_user_func_array(Array, Array)
+#3 C:\wamp64\www\api\public\index.php(381): Core\Router->dispatch('/api/generate-t...')
+#4 {main}
+File: C:\wamp64\www\api\core\Database.php
+Line: 75
+Logged Date Time: 2023-02-28 13:53:22

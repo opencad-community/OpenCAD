@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use Core\Response;
+use Opencad\App\Helpers\Config\ConfigHandler;
 
 class HomeController
 {
@@ -13,19 +14,19 @@ class HomeController
      */
     public function index()
     {
-        // Load the configuration file
-        $config = require_once __DIR__ . '/../../config/config.php';
+        // Create an instance of ConfigHandler
+        $config = new ConfigHandler();
 
-        // Extract the relevant data from the configuration file
-        $version = $config['app']['version'];
-        $title = $config['app']['title'];
-        $ocDescription = $config["app"]["oc_description"];
-        $apiDescription = $config["app"]["api_description"];
-        $ocGithub = $config["app"]["project_github"];
-        $authorName = $config['app']['author']["name"];
-        $authorEmail = $config["app"]["author"]["email"];
-        $authorDiscord = $config["app"]["author"]["discord"];
-        $authorGithub = $config["app"]["author"]["github"];
+        // Retrieve the configuration values using the get() method
+        $version = $config->get('api', 'app.version');
+        $title = $config->get('api', 'app.title');
+        $ocDescription = $config->get('api', 'app.oc_description');
+        $apiDescription = $config->get('api', 'app.api_description');
+        $ocGithub = $config->get('api', 'app.project_github');
+        $authorName = $config->get('api', 'app.author.name');
+        $authorEmail = $config->get('api', 'app.author.email');
+        $authorDiscord = $config->get('api', 'app.author.discord');
+        $authorGithub = $config->get('api', 'app.author.github');
 
         // Return the data in a response
         $response = [
