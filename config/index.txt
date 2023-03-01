@@ -1,3 +1,0 @@
-This folder will contain all of the config details that are required by the app. For example, app name, app version etc. 
-
-Will probably be held in a config.php file.

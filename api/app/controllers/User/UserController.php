@@ -4,6 +4,7 @@ namespace App\Controllers\User;
 
 use Exception;
 use Core\Request;
+use Opencad\App\EventManager\EventManager;
 use PDOException;
 use Core\Response;
 use App\Models\User\User;
@@ -247,6 +248,10 @@ class UserController
                     ];
 
                     Session::set("user", $user);
+                    
+                    $eventManager = new EventManager();
+                    $eventManager->trigger("user_login_success");
+
                     return;
                 }
             } else {

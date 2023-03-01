@@ -6,9 +6,7 @@ use Opencad\App\Helpers\LangHelper\LangHandler;
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
-if (session_status() === PHP_SESSION_NONE) {
-  session_start();
-}
+$session = new SessionHandler();
 
 $navItems = array(
 //   new NavItem('Home', '/'),
@@ -24,8 +22,6 @@ foreach ($plugins as $plugin) {
   $plugin->execute();
 }
 
-
 $config = new ConfigHandler();
-
 // retrieve the default LanguageFile instance
 $lang = LangHandler::getDefault();

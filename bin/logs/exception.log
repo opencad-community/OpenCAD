@@ -39,3 +39,220 @@ Stack trace: #0 C:\wamp64\www\api\app\Controllers\Api\AuthController.php(37): Co
 File: C:\wamp64\www\api\core\Database.php
 Line: 75
 Logged Date Time: 2023-02-28 13:53:22
+Exception: Template file not found: C:/wamp64/www/templates/index.html
+Stack trace: #0 C:\wamp64\www\app\Templating\Template.php(34): Opencad\App\Templating\Template->compile()
+#1 C:\wamp64\www\app\Templating\TemplatingEngine.php(32): Opencad\App\Templating\Template->render(Array)
+#2 C:\wamp64\www\core\Controllers\Home\HomeController.php(23): Opencad\App\Templating\TemplatingEngine->render('index', Array)
+#3 C:\wamp64\www\app\Routing\Router.php(33): Opencad\Core\Controllers\Home\HomeController->execute()
+#4 C:\wamp64\www\public\index.php(15): Opencad\App\Routing\Router->run()
+#5 {main}
+File: C:\wamp64\www\app\Templating\Template.php
+Line: 47
+Logged Date Time: 2023-02-28 17:18:20
+Exception: Template file not found: C:/wamp64/www/templates/index.html
+Stack trace: #0 C:\wamp64\www\app\Templating\Template.php(34): Opencad\App\Templating\Template->compile()
+#1 C:\wamp64\www\app\Templating\TemplatingEngine.php(32): Opencad\App\Templating\Template->render(Array)
+#2 C:\wamp64\www\core\Controllers\Home\HomeController.php(23): Opencad\App\Templating\TemplatingEngine->render('index', Array)
+#3 C:\wamp64\www\app\Routing\Router.php(33): Opencad\Core\Controllers\Home\HomeController->execute()
+#4 C:\wamp64\www\public\index.php(15): Opencad\App\Routing\Router->run()
+#5 {main}
+File: C:\wamp64\www\app\Templating\Template.php
+Line: 47
+Logged Date Time: 2023-02-28 17:18:24
+Exception: Template file not found: C:/wamp64/www/templates/index.html
+Stack trace: #0 C:\wamp64\www\app\Templating\Template.php(34): Opencad\App\Templating\Template->compile()
+#1 C:\wamp64\www\app\Templating\TemplatingEngine.php(32): Opencad\App\Templating\Template->render(Array)
+#2 C:\wamp64\www\core\Controllers\Home\HomeController.php(23): Opencad\App\Templating\TemplatingEngine->render('index', Array)
+#3 C:\wamp64\www\app\Routing\Router.php(33): Opencad\Core\Controllers\Home\HomeController->execute()
+#4 C:\wamp64\www\public\index.php(14): Opencad\App\Routing\Router->run()
+#5 {main}
+File: C:\wamp64\www\app\Templating\Template.php
+Line: 47
+Logged Date Time: 2023-02-28 17:18:37
+Exception: Template file not found: C:/wamp64/www/templates/index.html
+Stack trace: #0 C:\wamp64\www\app\Templating\Template.php(34): Opencad\App\Templating\Template->compile()
+#1 C:\wamp64\www\app\Templating\TemplatingEngine.php(32): Opencad\App\Templating\Template->render(Array)
+#2 C:\wamp64\www\core\Controllers\Home\HomeController.php(23): Opencad\App\Templating\TemplatingEngine->render('index', Array)
+#3 C:\wamp64\www\app\Routing\Router.php(33): Opencad\Core\Controllers\Home\HomeController->execute()
+#4 C:\wamp64\www\public\index.php(19): Opencad\App\Routing\Router->run()
+#5 {main}
+File: C:\wamp64\www\app\Templating\Template.php
+Line: 47
+Logged Date Time: 2023-02-28 20:48:25
+Exception: The language  is not supported yet! Please open a request on the GitHub
+Stack trace: #0 C:\wamp64\www\app\Helpers\LangHelper\LangHandler.php(113): Opencad\App\Helpers\LangHelper\LangHandler->__construct(NULL)
+#1 C:\wamp64\www\app\bootstrap.php(28): Opencad\App\Helpers\LangHelper\LangHandler::getDefault()
+#2 C:\wamp64\www\public\index.php(6): require_once('C:\\wamp64\\www\\a...')
+#3 {main}
+File: C:\wamp64\www\app\Helpers\LangHelper\LangHandler.php
+Line: 30
+Logged Date Time: 2023-02-28 21:51:36
+Exception: The language  is not supported yet! Please open a request on the GitHub
+Stack trace: #0 C:\wamp64\www\app\Helpers\LangHelper\LangHandler.php(113): Opencad\App\Helpers\LangHelper\LangHandler->__construct(NULL)
+#1 C:\wamp64\www\app\bootstrap.php(28): Opencad\App\Helpers\LangHelper\LangHandler::getDefault()
+#2 C:\wamp64\www\public\index.php(6): require_once('C:\\wamp64\\www\\a...')
+#3 {main}
+File: C:\wamp64\www\app\Helpers\LangHelper\LangHandler.php
+Line: 30
+Logged Date Time: 2023-02-28 21:52:01
+Exception: The language  is not supported yet! Please open a request on the GitHub
+Stack trace: #0 C:\wamp64\www\app\Helpers\LangHelper\LangHandler.php(113): Opencad\App\Helpers\LangHelper\LangHandler->__construct(NULL)
+#1 C:\wamp64\www\app\bootstrap.php(28): Opencad\App\Helpers\LangHelper\LangHandler::getDefault()
+#2 C:\wamp64\www\public\index.php(6): require_once('C:\\wamp64\\www\\a...')
+#3 {main}
+File: C:\wamp64\www\app\Helpers\LangHelper\LangHandler.php
+Line: 30
+Logged Date Time: 2023-02-28 21:52:21
+Exception: The language  is not supported yet! Please open a request on the GitHub
+Stack trace: #0 C:\wamp64\www\app\Helpers\LangHelper\LangHandler.php(113): Opencad\App\Helpers\LangHelper\LangHandler->__construct(NULL)
+#1 C:\wamp64\www\app\bootstrap.php(28): Opencad\App\Helpers\LangHelper\LangHandler::getDefault()
+#2 C:\wamp64\www\public\index.php(6): require_once('C:\\wamp64\\www\\a...')
+#3 {main}
+File: C:\wamp64\www\app\Helpers\LangHelper\LangHandler.php
+Line: 30
+Logged Date Time: 2023-02-28 21:52:50
+Exception: The language  is not supported yet! Please open a request on the GitHub
+Stack trace: #0 C:\wamp64\www\app\Helpers\LangHelper\LangHandler.php(113): Opencad\App\Helpers\LangHelper\LangHandler->__construct(NULL)
+#1 C:\wamp64\www\app\bootstrap.php(28): Opencad\App\Helpers\LangHelper\LangHandler::getDefault()
+#2 C:\wamp64\www\public\index.php(6): require_once('C:\\wamp64\\www\\a...')
+#3 {main}
+File: C:\wamp64\www\app\Helpers\LangHelper\LangHandler.php
+Line: 30
+Logged Date Time: 2023-02-28 21:53:35
+Exception: The language  is not supported yet! Please open a request on the GitHub
+Stack trace: #0 C:\wamp64\www\app\Helpers\LangHelper\LangHandler.php(113): Opencad\App\Helpers\LangHelper\LangHandler->__construct(NULL)
+#1 C:\wamp64\www\app\bootstrap.php(28): Opencad\App\Helpers\LangHelper\LangHandler::getDefault()
+#2 C:\wamp64\www\public\index.php(6): require_once('C:\\wamp64\\www\\a...')
+#3 {main}
+File: C:\wamp64\www\app\Helpers\LangHelper\LangHandler.php
+Line: 30
+Logged Date Time: 2023-02-28 21:53:40
+Exception: The language  is not supported yet! Please open a request on the GitHub
+Stack trace: #0 C:\wamp64\www\app\Helpers\LangHelper\LangHandler.php(113): Opencad\App\Helpers\LangHelper\LangHandler->__construct(NULL)
+#1 C:\wamp64\www\app\bootstrap.php(28): Opencad\App\Helpers\LangHelper\LangHandler::getDefault()
+#2 C:\wamp64\www\public\index.php(6): require_once('C:\\wamp64\\www\\a...')
+#3 {main}
+File: C:\wamp64\www\app\Helpers\LangHelper\LangHandler.php
+Line: 30
+Logged Date Time: 2023-02-28 21:53:57
+Exception: The language  is not supported yet! Please open a request on the GitHub
+Stack trace: #0 C:\wamp64\www\app\Helpers\LangHelper\LangHandler.php(113): Opencad\App\Helpers\LangHelper\LangHandler->__construct(NULL)
+#1 C:\wamp64\www\app\bootstrap.php(28): Opencad\App\Helpers\LangHelper\LangHandler::getDefault()
+#2 C:\wamp64\www\public\index.php(6): require_once('C:\\wamp64\\www\\a...')
+#3 {main}
+File: C:\wamp64\www\app\Helpers\LangHelper\LangHandler.php
+Line: 30
+Logged Date Time: 2023-02-28 21:54:12
+Exception: The language  is not supported yet! Please open a request on the GitHub
+Stack trace: #0 C:\wamp64\www\app\Helpers\LangHelper\LangHandler.php(113): Opencad\App\Helpers\LangHelper\LangHandler->__construct(NULL)
+#1 C:\wamp64\www\app\bootstrap.php(28): Opencad\App\Helpers\LangHelper\LangHandler::getDefault()
+#2 C:\wamp64\www\public\index.php(6): require_once('C:\\wamp64\\www\\a...')
+#3 {main}
+File: C:\wamp64\www\app\Helpers\LangHelper\LangHandler.php
+Line: 30
+Logged Date Time: 2023-02-28 21:54:29
+Exception: The language  is not supported yet! Please open a request on the GitHub
+Stack trace: #0 C:\wamp64\www\app\Helpers\LangHelper\LangHandler.php(113): Opencad\App\Helpers\LangHelper\LangHandler->__construct(NULL)
+#1 C:\wamp64\www\app\bootstrap.php(28): Opencad\App\Helpers\LangHelper\LangHandler::getDefault()
+#2 C:\wamp64\www\public\index.php(6): require_once('C:\\wamp64\\www\\a...')
+#3 {main}
+File: C:\wamp64\www\app\Helpers\LangHelper\LangHandler.php
+Line: 30
+Logged Date Time: 2023-02-28 21:55:13
+Exception: The language  is not supported yet! Please open a request on the GitHub
+Stack trace: #0 C:\wamp64\www\app\Helpers\LangHelper\LangHandler.php(113): Opencad\App\Helpers\LangHelper\LangHandler->__construct(NULL)
+#1 C:\wamp64\www\app\bootstrap.php(28): Opencad\App\Helpers\LangHelper\LangHandler::getDefault()
+#2 C:\wamp64\www\public\index.php(6): require_once('C:\\wamp64\\www\\a...')
+#3 {main}
+File: C:\wamp64\www\app\Helpers\LangHelper\LangHandler.php
+Line: 30
+Logged Date Time: 2023-02-28 21:55:31
+Exception: The language  is not supported yet! Please open a request on the GitHub
+Stack trace: #0 C:\wamp64\www\app\Helpers\LangHelper\LangHandler.php(113): Opencad\App\Helpers\LangHelper\LangHandler->__construct(NULL)
+#1 C:\wamp64\www\app\bootstrap.php(28): Opencad\App\Helpers\LangHelper\LangHandler::getDefault()
+#2 C:\wamp64\www\public\index.php(6): require_once('C:\\wamp64\\www\\a...')
+#3 {main}
+File: C:\wamp64\www\app\Helpers\LangHelper\LangHandler.php
+Line: 30
+Logged Date Time: 2023-02-28 21:58:05
+Exception: Database connection error
+Stack trace: #0 C:\wamp64\www\api\app\Models\User\User.php(26): Core\Database::getInstance()
+#1 C:\wamp64\www\api\app\Controllers\User\UserController.php(34): App\Models\User\User->__construct()
+#2 C:\wamp64\www\api\core\Router.php(149): App\Controllers\User\UserController->__construct()
+#3 C:\wamp64\www\api\public\index.php(381): Core\Router->dispatch('/api/user/login')
+#4 {main}
+File: C:\wamp64\www\api\core\Database.php
+Line: 90
+Logged Date Time: 2023-02-28 22:17:23
+Exception: The language  is not supported yet! Please open a request on the GitHub
+Stack trace: #0 C:\wamp64\www\app\Helpers\LangHelper\LangHandler.php(113): Opencad\App\Helpers\LangHelper\LangHandler->__construct(NULL)
+#1 C:\wamp64\www\app\bootstrap.php(28): Opencad\App\Helpers\LangHelper\LangHandler::getDefault()
+#2 C:\wamp64\www\public\index.php(6): require_once('C:\\wamp64\\www\\a...')
+#3 {main}
+File: C:\wamp64\www\app\Helpers\LangHelper\LangHandler.php
+Line: 30
+Logged Date Time: 2023-03-01 08:38:04
+Exception: The language  is not supported yet! Please open a request on the GitHub
+Stack trace: #0 C:\wamp64\www\app\Helpers\LangHelper\LangHandler.php(113): Opencad\App\Helpers\LangHelper\LangHandler->__construct(NULL)
+#1 C:\wamp64\www\app\bootstrap.php(28): Opencad\App\Helpers\LangHelper\LangHandler::getDefault()
+#2 C:\wamp64\www\public\index.php(6): require_once('C:\\wamp64\\www\\a...')
+#3 {main}
+File: C:\wamp64\www\app\Helpers\LangHelper\LangHandler.php
+Line: 30
+Logged Date Time: 2023-03-01 08:39:21
+Exception: The language  is not supported yet! Please open a request on the GitHub
+Stack trace: #0 C:\wamp64\www\app\Helpers\LangHelper\LangHandler.php(113): Opencad\App\Helpers\LangHelper\LangHandler->__construct(NULL)
+#1 C:\wamp64\www\app\bootstrap.php(28): Opencad\App\Helpers\LangHelper\LangHandler::getDefault()
+#2 C:\wamp64\www\public\index.php(6): require_once('C:\\wamp64\\www\\a...')
+#3 {main}
+File: C:\wamp64\www\app\Helpers\LangHelper\LangHandler.php
+Line: 30
+Logged Date Time: 2023-03-01 08:39:59
+Exception: The language  is not supported yet! Please open a request on the GitHub
+Stack trace: #0 C:\wamp64\www\app\Helpers\LangHelper\LangHandler.php(113): Opencad\App\Helpers\LangHelper\LangHandler->__construct(NULL)
+#1 C:\wamp64\www\app\bootstrap.php(28): Opencad\App\Helpers\LangHelper\LangHandler::getDefault()
+#2 C:\wamp64\www\public\index.php(6): require_once('C:\\wamp64\\www\\a...')
+#3 {main}
+File: C:\wamp64\www\app\Helpers\LangHelper\LangHandler.php
+Line: 30
+Logged Date Time: 2023-03-01 08:40:19
+Exception: The language  is not supported yet! Please open a request on the GitHub
+Stack trace: #0 C:\wamp64\www\app\Helpers\LangHelper\LangHandler.php(113): Opencad\App\Helpers\LangHelper\LangHandler->__construct(NULL)
+#1 C:\wamp64\www\app\bootstrap.php(28): Opencad\App\Helpers\LangHelper\LangHandler::getDefault()
+#2 C:\wamp64\www\public\index.php(6): require_once('C:\\wamp64\\www\\a...')
+#3 {main}
+File: C:\wamp64\www\app\Helpers\LangHelper\LangHandler.php
+Line: 30
+Logged Date Time: 2023-03-01 08:40:27
+Exception: The language  is not supported yet! Please open a request on the GitHub
+Stack trace: #0 C:\wamp64\www\app\Helpers\LangHelper\LangHandler.php(113): Opencad\App\Helpers\LangHelper\LangHandler->__construct(NULL)
+#1 C:\wamp64\www\app\bootstrap.php(28): Opencad\App\Helpers\LangHelper\LangHandler::getDefault()
+#2 C:\wamp64\www\public\index.php(6): require_once('C:\\wamp64\\www\\a...')
+#3 {main}
+File: C:\wamp64\www\app\Helpers\LangHelper\LangHandler.php
+Line: 30
+Logged Date Time: 2023-03-01 08:40:32
+Exception: The language  is not supported yet! Please open a request on the GitHub
+Stack trace: #0 C:\wamp64\www\app\Helpers\LangHelper\LangHandler.php(113): Opencad\App\Helpers\LangHelper\LangHandler->__construct(NULL)
+#1 C:\wamp64\www\app\bootstrap.php(28): Opencad\App\Helpers\LangHelper\LangHandler::getDefault()
+#2 C:\wamp64\www\public\index.php(6): require_once('C:\\wamp64\\www\\a...')
+#3 {main}
+File: C:\wamp64\www\app\Helpers\LangHelper\LangHandler.php
+Line: 30
+Logged Date Time: 2023-03-01 08:44:58
+Exception: The language  is not supported yet! Please open a request on the GitHub
+Stack trace: #0 C:\wamp64\www\app\Helpers\LangHelper\LangHandler.php(113): Opencad\App\Helpers\LangHelper\LangHandler->__construct(NULL)
+#1 C:\wamp64\www\app\bootstrap.php(28): Opencad\App\Helpers\LangHelper\LangHandler::getDefault()
+#2 C:\wamp64\www\public\index.php(6): require_once('C:\\wamp64\\www\\a...')
+#3 {main}
+File: C:\wamp64\www\app\Helpers\LangHelper\LangHandler.php
+Line: 30
+Logged Date Time: 2023-03-01 08:45:46
+Exception: The language  is not supported yet! Please open a request on the GitHub
+Stack trace: #0 C:\wamp64\www\app\Helpers\LangHelper\LangHandler.php(113): Opencad\App\Helpers\LangHelper\LangHandler->__construct(NULL)
+#1 C:\wamp64\www\app\bootstrap.php(28): Opencad\App\Helpers\LangHelper\LangHandler::getDefault()
+#2 C:\wamp64\www\public\index.php(6): require_once('C:\\wamp64\\www\\a...')
+#3 {main}
+File: C:\wamp64\www\app\Helpers\LangHelper\LangHandler.php
+Line: 30
+Logged Date Time: 2023-03-01 08:45:54
