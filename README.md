@@ -1,6 +1,7 @@
 <p align="center">
 <a rel="noopener" href="http://discord.io/opencadproject"><img alt="Discord" src="https://img.shields.io/discord/352884538676084756?color=blue&logo=discord&logoColor=white&style=plastic"></a>
 <a rel="noopener" href="https://opencollective.com/101schemesio/projects/opencad"><img src="https://img.shields.io/badge/Support%20OpenCAD-%20-green?style=plastic"></a>
+<a rel="noopener" href="https://twitter.com/intent/user?screen_name=OpenCADProject"><img src="https://img.shields.io/badge/Followt%20OpenCAD-%20-blue?style=plastic&logo=twitter"></a>
 <br />
 <a rel="noopener" href="https://github.com/opencad-community/opencad/blob/master/LICENSE"><img alt="Repository license" src="https://img.shields.io/github/license/opencad-community/opencad?color=green&style=plastic"></a>
 <a rel="noopener" href="https://github.com/opencad-community/opencad/issues"><img alt="GitHub issues" src="https://img.shields.io/github/issues/opencad-community/opencad?style=plastic"></a>
