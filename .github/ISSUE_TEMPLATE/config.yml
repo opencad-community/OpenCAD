@@ -5,7 +5,7 @@ contact_links:
     url: https://github.com/opencad-community/opencad/blob/develop/CONTRIBUTING.md
     about: "Please read through our contributing policy before opening an issue or pull request"
   - name: ❓ Discussion
-    url: https://github.com/orgs/opencad-community/discussions
+    url: https://github.com/opencad-community/opencad/discussions
     about: "If you're just looking for help, try starting a discussion instead"
   - name: 💬 Community Discord
     url: http://discord.io/opencadproject
